@@ -12,14 +12,9 @@ public class Pet
     public string Name { get; set; }
 
     public string Breed { get; set; }
-
     public DateTime BirthDate { get; set; }
-
     [Required] public Gender Gender { get; set; }
-
     public string Color { get; set; }
-
     public string Marks { get; set; }
-
     public string Tattos { get; set; }
 }

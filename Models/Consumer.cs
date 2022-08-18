@@ -7,6 +7,4 @@ namespace dotnetapp.Models;
 public class Consumer : Person
 {
     [Required] public bool IsOwner { get; set; }
-    
-
 }
