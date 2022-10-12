@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using PetHealth.Core.Entities;
 using System;
 using System.Collections.Generic;
@@ -9,7 +11,7 @@ using dotnetapp.PetHealth.PetHealth.src.PetHealth.Core.Entities;
 
 namespace PetHealth.Infrastructure.Persistence.Contexts
 {
-    public class PetHealthContext: DbContext
+    public class PetHealthContext: IdentityDbContext<ApplicationUser, IdentityRole, string>
     {
         public PetHealthContext(DbContextOptions<PetHealthContext> options) : base(options)
         {
@@ -38,6 +40,6 @@ namespace PetHealth.Infrastructure.Persistence.Contexts
         }
 
         public DbSet<Person> Persons { get; set; }
-
+        
     }
 }
