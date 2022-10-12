@@ -1,10 +1,11 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using PetHealth.Core.Interfaces;
 using PetHealth.Infrastructure.Persistence.Contexts;
 using PetHealth.Infrastructure.Persistence.Repositories;
 
-namespace PetHealthInfraetructure
+namespace PetHealth.Infrastructure
 {
     public static class DependencyInjection
     {
@@ -12,9 +13,8 @@ namespace PetHealthInfraetructure
         {
             var defaultConnectionString = configuration.GetConnectionString("DefaultConnection");
 
-            //services.AddDbContext<PetHealthContext>(options =>
-            //    options);
-
+            services.AddDbContext<PetHealthContext>(options =>
+                options.UseSqlServer(defaultConnectionString));
             services.AddScoped<IPersonService, PersonService>();
 
             return services;
