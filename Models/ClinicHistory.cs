@@ -6,8 +6,6 @@ namespace dotnetapp.Models;
 
 public class ClinicHistory
 {
-    [Key]
-    public long IdClinicHistory { get; set; }
 
     public long IdPet { get; set; }
 

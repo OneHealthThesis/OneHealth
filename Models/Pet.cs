@@ -17,4 +17,5 @@ public class Pet
     public string Color { get; set; }
     public string Marks { get; set; }
     public string Tattos { get; set; }
+    public int Version { get; set; }
 }

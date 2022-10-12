@@ -23,5 +23,7 @@ namespace dotnetapp.Models
         public string Ethnicity { get; set; }
 
         public string Address { get; set; }
+
+        public int Version { get; set; }
     }
 }

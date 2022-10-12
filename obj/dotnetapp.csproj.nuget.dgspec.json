@@ -1,25 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "/usr/src/app/temp/a462a9d8-f46f-41a4-bc00-7b838911ddaa/dotnetapp.csproj": {}
+    "C:\\Adrian\\School\\Tesis\\App Una salud\\OneHealth\\dotnetapp.csproj": {}
   },
   "projects": {
-    "/usr/src/app/temp/a462a9d8-f46f-41a4-bc00-7b838911ddaa/dotnetapp.csproj": {
+    "C:\\Adrian\\School\\Tesis\\App Una salud\\OneHealth\\dotnetapp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/usr/src/app/temp/a462a9d8-f46f-41a4-bc00-7b838911ddaa/dotnetapp.csproj",
+        "projectUniqueName": "C:\\Adrian\\School\\Tesis\\App Una salud\\OneHealth\\dotnetapp.csproj",
         "projectName": "dotnetapp",
-        "projectPath": "/usr/src/app/temp/a462a9d8-f46f-41a4-bc00-7b838911ddaa/dotnetapp.csproj",
-        "packagesPath": "/root/.nuget/packages/",
-        "outputPath": "/usr/src/app/temp/a462a9d8-f46f-41a4-bc00-7b838911ddaa/obj/",
+        "projectPath": "C:\\Adrian\\School\\Tesis\\App Una salud\\OneHealth\\dotnetapp.csproj",
+        "packagesPath": "C:\\Users\\adria\\.nuget\\packages\\",
+        "outputPath": "C:\\Adrian\\School\\Tesis\\App Una salud\\OneHealth\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/root/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\adria\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -38,6 +40,30 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.7, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.0.7, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[6.0.7, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.0.7, )"
+            },
+            "Microsoft.OpenApi": {
+              "target": "Package",
+              "version": "[1.3.2, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.2.3, )"
@@ -61,7 +87,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/root/.dotnet/sdk/6.0.301/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     }

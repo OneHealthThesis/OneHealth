@@ -16,6 +16,8 @@ public class ApplicationDbContext : DbContext
 
         modelBuilder.Entity<Allergies>()
             .HasKey(c => new { c.IdClinicHistory, c.IdDrug });
+        modelBuilder.Entity<ClinicHistory>()
+            .HasKey(c => new { c.IdPet });
     }
 
     public DbSet<Pet> Pets { get; set; }
