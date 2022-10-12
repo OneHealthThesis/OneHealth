@@ -14,7 +14,7 @@ namespace PetHealth.Infrastructure
             var defaultConnectionString = configuration.GetConnectionString("DefaultConnection");
 
             services.AddDbContext<PetHealthContext>(options =>
-                options.UseSqlServer(defaultConnectionString));
+                options.UseSqlServer(defaultConnectionString, b => b.MigrationsAssembly(nameof(PetHealth))));
             services.AddScoped<IPersonService, PersonService>();
 
             return services;
