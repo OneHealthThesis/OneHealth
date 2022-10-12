@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using dotnetapp.PetHealth.PetHealth.src.PetHealth.Core.Entities;
 
 namespace PetHealth.Infrastructure.Persistence.Contexts
 {
@@ -12,6 +13,13 @@ namespace PetHealth.Infrastructure.Persistence.Contexts
     {
         public PetHealthContext(DbContextOptions<PetHealthContext> options) : base(options)
         {
+           
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Allergies>()
+                .HasKey(c => new { c.PersonID, c.PetID });
         }
 
         public DbSet<Person> Persons { get; set; }

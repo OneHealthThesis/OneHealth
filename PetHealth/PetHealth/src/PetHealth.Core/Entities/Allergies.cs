@@ -3,12 +3,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace dotnetapp.PetHealth.PetHealth.src.PetHealth.Core.Entities
 {
-    public class Allergy
+    public class Allergies
     {
         [ForeignKey(""), Key] public long PersonID { get; set; }
         [ForeignKey("")] public long PetID { get; set; }
         [Required] public DateTime Date { get; set; }
-        [Required] public string AllergicTo { get; set; }
+        [Required] public string Allergic { get; set; }
         public string Notes { get; set; }
     }
 }

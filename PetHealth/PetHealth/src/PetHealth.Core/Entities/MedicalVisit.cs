@@ -11,6 +11,5 @@ namespace dotnetapp.PetHealth.PetHealth.src.PetHealth.Core.Entities
         public string Place { get; set; }
         public string Doctor { get; set; }
         public string Notes { get; set; }
-
     }
 }
