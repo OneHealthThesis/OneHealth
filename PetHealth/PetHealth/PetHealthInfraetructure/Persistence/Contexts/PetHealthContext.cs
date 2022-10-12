@@ -20,6 +20,21 @@ namespace PetHealth.Infrastructure.Persistence.Contexts
         {
             modelBuilder.Entity<Allergies>()
                 .HasKey(c => new { c.PersonID, c.PetID });
+            modelBuilder.Entity<LabTest>()
+                .HasKey(c => new { c.PersonID, c.PetID });
+            modelBuilder.Entity<MedicalVisit>()
+                .HasKey(c => new { c.PersonID, c.PetID });
+            modelBuilder.Entity<Pathology>()
+                .HasKey(c => new { c.PersonID, c.PetID });
+            modelBuilder.Entity<PrescriptionDrug>()
+                .HasKey(c => new { c.PersonID, c.PetID });
+            modelBuilder.Entity<Radiology>()
+                .HasKey(c => new { c.PersonID, c.PetID });
+            modelBuilder.Entity<Surgeries>()
+                .HasKey(c => new { c.PersonID, c.PetID });
+            modelBuilder.Entity<Vaccines>()
+                .HasKey(c => new { c.PersonID, c.PetID });
+
         }
 
         public DbSet<Person> Persons { get; set; }

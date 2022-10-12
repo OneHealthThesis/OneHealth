@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace dotnetapp.PetHealth.PetHealth.src.PetHealth.Core.Entities
 {
-    public class Surgery
+    public class Surgeries
     {
         [ForeignKey(""), Key] public long PersonID { get; set; }
         [ForeignKey("")] public long PetID { get; set; }
