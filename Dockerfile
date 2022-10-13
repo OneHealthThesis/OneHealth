@@ -7,11 +7,12 @@ RUN dotnet restore
 
 # copy and publish app and libraries
 COPY . .
-RUN dotnet publish -c release -o /app --no-restore
+RUN dotnet publish ./PetHealth/PetHealth.csproj -c release -o /app --no-restore
 
 # final stage/image
 FROM mcr.microsoft.com/dotnet/sdk:6.0
 WORKDIR /app
 COPY --from=build /app .
 USER 1000
-ENTRYPOINT ["dotnet", "dotnetapp.dll"]
+
+ENTRYPOINT ["dotnet", "PetHealth.dll"]
