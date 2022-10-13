@@ -15,7 +15,7 @@ COPY PetHealthInfraetructure/. ./PetHealthInfraetructure/
 COPY PetHealth/. ./PetHealth/
 
 WORKDIR /app/PetHealth
-RUN dotnet publish -c release -o /pethealth --no-restore
+RUN dotnet publish -c release -o pethealth --no-restore
 
 # final stage/image
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS runtime
