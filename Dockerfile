@@ -1,5 +1,5 @@
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
-WORKDIR /source
+WORKDIR /app
 
 # copy csproj and restore as distinct layers
 COPY *.sln .
@@ -16,7 +16,7 @@ COPY PetHealth/. ./PetHealth/
 RUN dotnet publish -c release -o /pethealth --no-restore
 
 # final stage/image
-FROM mcr.microsoft.com/dotnet/sdk:6.0
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS runtime
 WORKDIR /app
 COPY --from=build /app/PetHealth/pethealth ./
 USER 1000
