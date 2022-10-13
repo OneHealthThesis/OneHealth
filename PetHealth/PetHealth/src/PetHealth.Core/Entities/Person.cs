@@ -27,8 +27,6 @@ namespace PetHealth.Core.Entities
         [Required] 
         public DateTime BirthDate { get; set; }
 
-        public string Ethnicity { get; set; }
-
         public string Address { get; set; }
 
         public string Version { get; set; }

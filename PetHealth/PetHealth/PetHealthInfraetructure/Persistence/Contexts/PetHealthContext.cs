@@ -20,6 +20,7 @@ namespace PetHealth.Infrastructure.Persistence.Contexts
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Allergies>()
                 .HasKey(c => new { c.PersonID, c.PetID });
         }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PetHealth.Core.Entities
 {
-    public class ApplicationUser: IdentityUser
+    public class ApplicationUser: IdentityUser<string>
     {
     }
 }

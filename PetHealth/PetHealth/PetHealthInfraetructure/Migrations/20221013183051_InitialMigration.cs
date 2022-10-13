@@ -3,12 +3,27 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace PetHealth.Migrations
+namespace PetHealth.Infrastructure.Migrations
 {
     public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Allergies",
+                columns: table => new
+                {
+                    PersonID = table.Column<long>(type: "bigint", nullable: false),
+                    PetID = table.Column<long>(type: "bigint", nullable: false),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Allergic = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Notes = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Allergies", x => new { x.PersonID, x.PetID });
+                });
+
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
@@ -215,6 +230,9 @@ namespace PetHealth.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Allergies");
+
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 

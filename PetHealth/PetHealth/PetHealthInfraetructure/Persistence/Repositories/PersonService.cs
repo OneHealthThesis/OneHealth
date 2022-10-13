@@ -81,7 +81,6 @@ namespace PetHealth.Infrastructure.Persistence.Repositories
             {
                 person.Name = request.Name;
                 person.LastName = request.LastName;
-                person.Ethnicity = request.Ethnicity;
                 person.Address = request.Address;
                 person.BirthDate = request.BirthDate;
 

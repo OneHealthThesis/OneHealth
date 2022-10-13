@@ -9,11 +9,11 @@ using PetHealth.Infrastructure.Persistence.Contexts;
 
 #nullable disable
 
-namespace PetHealth.Migrations
+namespace PetHealth.Infrastructure.Migrations
 {
     [DbContext(typeof(PetHealthContext))]
-    [Migration("20221012214311_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20221013183926_ModifyPersonTable")]
+    partial class ModifyPersonTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,6 +23,30 @@ namespace PetHealth.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("dotnetapp.PetHealth.PetHealth.src.PetHealth.Core.Entities.Allergies", b =>
+                {
+                    b.Property<long>("PersonID")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("PetID")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Allergic")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Notes")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("PersonID", "PetID");
+
+                    b.ToTable("Allergies");
+                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -236,10 +260,6 @@ namespace PetHealth.Migrations
 
                     b.Property<DateTime>("BirthDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("Ethnicity")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsAdmin")
                         .HasColumnType("bit");
