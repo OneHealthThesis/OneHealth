@@ -12,7 +12,7 @@ RUN dotnet restore
 # copy and publish app and libraries
 COPY src/PetHealth.Core/. ./src/PetHealth.Core/
 COPY PetHealthInfraetructure/. ./PetHealthInfraetructure/
-COPY PetHealth. ./PetHealth/
+COPY PetHealth/. ./PetHealth/
 RUN dotnet publish -c release -o /pethealth --no-restore
 
 # final stage/image
