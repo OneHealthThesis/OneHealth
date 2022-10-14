@@ -9,5 +9,11 @@ namespace PetHealth.Core.Entities
 {
     public class ApplicationUser: IdentityUser<string>
     {
+        public string? FirstName { get; set; }
+        public string? LastName { get; set; }
+
+
+        public ICollection<UserPermission> UserPermissions { get; set; } = new List<UserPermission>();
+
     }
 }
