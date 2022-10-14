@@ -13,6 +13,7 @@ using Microsoft.Extensions.Options;
 using PetHealth.Core.DTOs;
 using PetHealth.Core.Entities;
 using PetHealth.Core.Exceptions;
+using PetHealth.Core.Interfaces;
 using PetHealth.Core.Utils;
 using PetHealth.Infrastructure.Persistence.Contexts;
 using System;
@@ -30,7 +31,7 @@ using System.Threading.Tasks;
 //using ClaimTypes = BBWM.Core.Membership.Model.ClaimTypes;
 using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
 
-namespace BBWM.Core.Membership.Services
+namespace PetHealth.Infrastructure.Persistence.Repositories
 {
     public class UserService : IUserService
     {

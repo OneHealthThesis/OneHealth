@@ -1,10 +1,10 @@
-using BBWM.Core.Membership.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using PetHealth.Core.DTOs;
 using PetHealth.Core.Exceptions;
+using PetHealth.Core.Interfaces;
 using PetHealth.Infrastructure.Persistence.Contexts;
 using System;
 using System.Security.Claims;
@@ -12,11 +12,12 @@ using System.Threading;
 using System.Threading.Tasks;
 using ClaimTypes = System.Security.Claims.ClaimTypes;
 
-namespace BBWT.Server.Api
+namespace PetHealth.Controllers
 {
     [Produces("application/json")]
     [Route("api/account"), ResponseCache(NoStore = true)]
-    public class AccountApiController : ControllerBase
+    [ApiController]
+    public class AccountApiController : Controller
     {
         ILogger<AccountApiController> _logger;
         private readonly IUserService _userService;

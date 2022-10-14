@@ -16,6 +16,7 @@ namespace PetHealth.Infrastructure
             services.AddDbContext<PetHealthContext>(options =>
                 options.UseSqlServer(defaultConnectionString));
             services.AddScoped<IPersonService, PersonService>();
+            services.AddScoped<IUserService, UserService>();
 
             return services;
         }

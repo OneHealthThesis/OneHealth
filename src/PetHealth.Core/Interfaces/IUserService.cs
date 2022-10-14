@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
 
-namespace BBWM.Core.Membership.Services
+namespace PetHealth.Core.Interfaces
 {
     public interface IUserService
     {

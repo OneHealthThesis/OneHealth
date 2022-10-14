@@ -17,10 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\PetHealthInfraetructure\PetHealth.Infrastructure.csproj" />
     <ProjectReference Include="..\src\PetHealth.Core\PetHealth.Core.csproj" />
   </ItemGroup>

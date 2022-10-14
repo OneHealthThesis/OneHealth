@@ -1,5 +1,6 @@
 
 using Microsoft.EntityFrameworkCore;
+using PetHealth.Core.Entities;
 using PetHealth.Infrastructure.Persistence.Contexts;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +11,14 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddIdentity<ApplicationUser, Role>(options => {
+    options.SignIn.RequireConfirmedAccount = false;
+
+    //Other options go here
+}
+        )
+    .AddEntityFrameworkStores<PetHealthContext>();
 
 // Project specific.
 builder.Services.AddCore();
@@ -34,7 +43,7 @@ using (var scope = app.Services.CreateScope())
 }
 
 app.UseHttpsRedirection();
-
+app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
