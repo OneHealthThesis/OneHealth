@@ -1,10 +1,14 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using PetHealth.Core.Entities;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace dotnetapp.PetHealth.PetHealth.src.PetHealth.Core.Entities
+namespace PetHealth.Core.Entities
 {
-    public class Radiology
+    public class VaccineConsultation
     {
         [Key] public string Id { get; set; }
         [Required] public string PersonId { get; set; }
@@ -12,11 +16,9 @@ namespace dotnetapp.PetHealth.PetHealth.src.PetHealth.Core.Entities
         [ForeignKey("PetId")] public Pet Pet { get; set; }
         [ForeignKey("PersonId")] public ApplicationUser Person { get; set; }
         [Required] public DateTime Date { get; set; }
-        public string Title { get; set; }
-        public string Result { get; set; }
+        public string Vaccine { get; set; }
         public string Place { get; set; }
         public string Doctor { get; set; }
         public string Notes { get; set; }
-
     }
 }

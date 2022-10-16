@@ -12,8 +12,6 @@ namespace PetHealth.Core.Entities
     {
         [Key] public long PetID { get; set; }
 
-        [Required] public long PersonID { get; set; }
-
         public string Name { get; set; }
         
         public  DateTime Birthday { get; set; }
@@ -24,6 +22,5 @@ namespace PetHealth.Core.Entities
 
         public string BloodType { get; set; }
 
-        [ForeignKey("PersonID")] public ApplicationUser Person { get; set; }
     }
 }

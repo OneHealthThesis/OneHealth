@@ -21,35 +21,31 @@ namespace PetHealth.Infrastructure.Persistence.Contexts
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<Allergies>()
-                .HasKey(c => new { c.PersonID, c.PetID });
-            modelBuilder.Entity<LabTest>()
-                .HasKey(c => new { c.PersonID, c.PetID });
-            modelBuilder.Entity<MedicalVisit>()
-                .HasKey(c => new { c.PersonID, c.PetID });
-            modelBuilder.Entity<Pathology>()
-                .HasKey(c => new { c.PersonID, c.PetID });
-            modelBuilder.Entity<PrescriptionDrug>()
-                .HasKey(c => new { c.PersonID, c.PetID });
-            modelBuilder.Entity<Radiology>()
-                .HasKey(c => new { c.PersonID, c.PetID });
-            modelBuilder.Entity<Surgeries>()
-                .HasKey(c => new { c.PersonID, c.PetID });
-            modelBuilder.Entity<Vaccines>()
-                .HasKey(c => new { c.PersonID, c.PetID });
+           modelBuilder.Entity<Person_Pet>()
+               .HasKey(p=>new { p.PetId,p.PersonId } );
 
         }
 
         public DbSet<ApplicationUser> Persons { get; set; }
-
-
-        }
-
-        public DbSet<Person> Persons { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<Permission> Permissions { get; set; }
         public DbSet<RolePermission> RolePermissions { get; set; }
         public DbSet<UserPermission> UserPermissions { get; set; }
-        
+
+        public DbSet<Pet> Pets { get; set; }
+        public DbSet<Person_Pet> PersonHasPet { get; set; }
+
+
+        public DbSet<Allergies> Allergies { get; set; }
+        public DbSet<LabTest> LabTests { get; set; }
+        public DbSet<MedicalVisit> MedicalVisits { get; set; }
+        public DbSet<Pathology> Pathologies { get; set; }
+        public  DbSet<PrescriptionDrug> PrescriptionDrug { get; set; }
+        public DbSet<Radiology> Radiologies { get; set; }
+        public DbSet<Surgeries> Surgeries { get; set; }
+        public DbSet<Vaccines> Vaccines { get; set; }
+        public DbSet<VaccineConsultation> VaccineConsultations { get; set; }
+        public DbSet<AllergyConsultation> AllergyConsultations { get; set; }
+
     }
 }

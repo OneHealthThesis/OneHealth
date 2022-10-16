@@ -6,11 +6,12 @@ namespace dotnetapp.PetHealth.PetHealth.src.PetHealth.Core.Entities
 {
     public class Pathology
     {
-        [ Key] public long PersonID { get; set; }
-        [Required] public long PetID { get; set; }
-        [ForeignKey("PetID")] public Pet Pet { get; set; }
-        [ForeignKey("PersonID")] public ApplicationUser  Person { get; set; }
-        
+        [Key] public string Id { get; set; }
+        [Required] public string PersonId { get; set; }
+        [Required] public long PetId { get; set; }
+        [ForeignKey("PetId")] public Pet Pet { get; set; }
+        [ForeignKey("PersonId")] public ApplicationUser Person { get; set; }
+
         [Required] public DateTime Date { get; set; }
         public string Title { get; set; }
         public string Result { get; set; }

@@ -6,14 +6,7 @@ namespace dotnetapp.PetHealth.PetHealth.src.PetHealth.Core.Entities
 {
     public class Vaccines
     {
-        [Key] public long PersonID { get; set; }
-        [Required] public long PetID { get; set; }
-        [ForeignKey("PetID")] public Pet Pet { get; set; }
-        [ForeignKey("PersonID")] public ApplicationUser Person { get; set; }
-        [Required] public DateTime Date { get; set; }
-        public string Vaccine { get; set; }
-        public string Place { get; set; }
-        public string Doctor { get; set; }
-        public string Notes { get; set; }
+        [Key] public long VaccineId { get; set; }
+        [Required] public string Name { get; set; }
     }
 }
