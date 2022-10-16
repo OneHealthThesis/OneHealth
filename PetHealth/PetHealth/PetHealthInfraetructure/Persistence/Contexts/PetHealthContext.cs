@@ -39,7 +39,7 @@ namespace PetHealth.Infrastructure.Persistence.Contexts
 
         }
 
-        public DbSet<Person> Persons { get; set; }
+        public DbSet<ApplicationUser> Persons { get; set; }
         
     }
 }
