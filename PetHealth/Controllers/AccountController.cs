@@ -74,7 +74,12 @@ namespace PetHealth.Controllers
 
 
 
-
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult TestGet()
+        {
+            return Ok("test endpoint working.");
+        }
 
         [HttpPost]
         [Route("logout")]
