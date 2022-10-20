@@ -117,7 +117,7 @@ namespace PetHealth.Infrastructure.Persistence.Repositories
             await _signInManager.SignInAsync(user, new AuthenticationProperties(), "Password");
 
             var loggedUser = _mapper.Map<UserDTO>(
-                await _context.Users.FindAsync(user.Id, cancellationToken));
+                await _context.Users.FindAsync(user.Id));
 
             return new AuthResultDTO { UserId = user.Id, LoggedUser = loggedUser };
         }
