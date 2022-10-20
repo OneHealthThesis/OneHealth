@@ -9,11 +9,11 @@ using PetHealth.Infrastructure.Persistence.Contexts;
 
 #nullable disable
 
-namespace PetHealth.Migrations
+namespace PetHealth.Infrastructure.Migrations
 {
     [DbContext(typeof(PetHealthContext))]
-    [Migration("20221016225828_update_entities")]
-    partial class update_entities
+    [Migration("20221020204550_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
