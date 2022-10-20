@@ -76,7 +76,8 @@ namespace PetHealth.Infrastructure.Persistence.Repositories
                 UserName = dto.Email,
                 FirstName = dto.FirstName?.Trim(),
                 LastName = dto.LastName?.Trim(),
-                Email = dto.Email
+                Email = dto.Email,
+                Id = Guid.NewGuid().ToString(),
             };
 
 

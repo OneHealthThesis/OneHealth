@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using PetHealth.Core.Interfaces;
 using PetHealth.Infrastructure.Persistence.Contexts;
+using PetHealth.Infrastructure.Persistence.Repositories;
 
 namespace PetHealth.Infrastructure
 {
@@ -15,7 +16,7 @@ namespace PetHealth.Infrastructure
             services.AddDbContext<PetHealthContext>(options =>
                 options.UseSqlServer(defaultConnectionString));
             //services.AddScoped<IPersonService, PersonService>();
-
+            services.AddScoped<IUserService, UserService>();
             return services;
         }
     }
