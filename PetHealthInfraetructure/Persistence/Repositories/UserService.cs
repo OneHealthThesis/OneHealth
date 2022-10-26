@@ -67,8 +67,9 @@ namespace PetHealth.Infrastructure.Persistence.Repositories
         public async Task Register(UserRegistrationDTO dto, CancellationToken cancellationToken = default)
         {
             var existingUser = await _userManager.FindByEmailAsync(dto.Email);
-            if (existingUser != null)
-                throw new BusinessException($"User with email {dto.Email} already exists.");
+            var existingPhone = this.FindUserByPhone(dto.PhoneNumber);
+            if (existingUser != null || existingPhone != null)
+                throw new BusinessException($"This email or phone number is already in use.");
 
 
             var user = new ApplicationUser
@@ -77,6 +78,7 @@ namespace PetHealth.Infrastructure.Persistence.Repositories
                 FirstName = dto.FirstName?.Trim(),
                 LastName = dto.LastName?.Trim(),
                 Email = dto.Email,
+                PhoneNumber = dto.PhoneNumber,
                 Id = Guid.NewGuid().ToString(),
             };
 
@@ -85,8 +87,33 @@ namespace PetHealth.Infrastructure.Persistence.Repositories
             if (!result.Succeeded)
                 throw new BusinessException(result.Errors.First().Description);
 
-           
-            await _userManager.UpdateAsync(user);
+
+            var pet1 = new Pet
+            {
+                Birthday = new DateTime(),
+                BloodType = "type not set",
+                Breed = "not set",
+                Gender = "not set",
+                Name = "not set"
+            };
+
+            var pet2 = new Pet
+            {
+                Birthday = new DateTime(),
+                BloodType = "type not set",
+                Breed = "not set",
+                Gender = "not set",
+                Name = "not set"
+            };
+
+            var addedPet1 = this._context.Pets.Add(pet1);
+            var addedPet2 = this._context.Pets.Add(pet2);
+            await this._context.SaveChangesAsync(cancellationToken);
+
+            this._context.PersonHasPet.Add(new Person_Pet { PersonId = user.Id, PetId = pet1.PetID });
+            this._context.PersonHasPet.Add(new Person_Pet { PersonId = user.Id, PetId = pet2.PetID });
+
+            await this._context.SaveChangesAsync(cancellationToken);
 
         }
 
@@ -98,7 +125,7 @@ namespace PetHealth.Infrastructure.Persistence.Repositories
             
 
             var user = await _userManager.Users
-                .FirstOrDefaultAsync(u => u.Email == dto.Email, cancellationToken);
+                .FirstOrDefaultAsync(u => u.Email == dto.Email && u.PhoneNumber == dto.PhoneNumber, cancellationToken);
 
             // Whether user with specified email exist
             if (user == null)
@@ -119,7 +146,12 @@ namespace PetHealth.Infrastructure.Persistence.Repositories
             var loggedUser = _mapper.Map<UserDTO>(
                 await _context.Users.FindAsync(user.Id));
 
-            return new AuthResultDTO { UserId = user.Id, LoggedUser = loggedUser };
+            var petsIds = this._context.PersonHasPet
+                .Where(entity => entity.PersonId == loggedUser.Id)
+                .Select(entity => entity.PetId)
+                .ToList();
+
+            return new AuthResultDTO { UserId = user.Id, LoggedUser = loggedUser, PetsIds = petsIds };
         }
 
         
@@ -147,5 +179,9 @@ namespace PetHealth.Infrastructure.Persistence.Repositories
             public static readonly string Disabled2FAOrU2F = "Cannot generate recovery codes for user as he does not have 2FA or U2F enabled";
             public static readonly string NoU2FChallenges = "There are no U2F registration challenges for this user";
         }
+
+
+        private ApplicationUser FindUserByPhone(string phoneNumber)
+            => this._context.Users.FirstOrDefault(user => user.PhoneNumber == phoneNumber);        
     }
 }

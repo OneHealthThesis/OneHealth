@@ -14,5 +14,6 @@ namespace PetHealth.Core.DTOs
         public int? LockoutTimeoutInSeconds { get; set; }
         public UserDTO LoggedUser { get; set; }
         public bool IsNewBrowserLogin { get; set; }
+        public List<long> PetsIds { get; set; }
     }
 }
