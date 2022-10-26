@@ -10,9 +10,6 @@ namespace PetHealth.Core.DTOs
     {
         public string Email { get; set; }
         public string Password { get; set; }
-        public string Browser { get; set; }
-        public string RealFirstName { get; set; }
-        public string RealLastName { get; set; }
-        public string RealEmail { get; set; }
+        public string PhoneNumber { get; set; }
     }
 }
