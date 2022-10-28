@@ -11,18 +11,18 @@ using dotnetapp.PetHealth.PetHealth.src.PetHealth.Core.Entities;
 
 namespace PetHealth.Infrastructure.Persistence.Contexts
 {
-    public class PetHealthContext: IdentityDbContext<ApplicationUser, Role, string>
+    public class PetHealthContext : IdentityDbContext<ApplicationUser, Role, string>
     {
         public PetHealthContext(DbContextOptions<PetHealthContext> options) : base(options)
         {
-           
+
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-           modelBuilder.Entity<Person_Pet>()
-               .HasKey(p=>new { p.PetId,p.PersonId } );
+            modelBuilder.Entity<Person_Pet>()
+                .HasKey(p => new { p.PetId, p.PersonId });
 
         }
 
@@ -37,15 +37,16 @@ namespace PetHealth.Infrastructure.Persistence.Contexts
 
 
         public DbSet<Allergies> Allergies { get; set; }
+        public DbSet<AllergyConsultation> AllergyConsultations { get; set; }
+        public DbSet<Drug> Drugs { get; set; }
         public DbSet<LabTest> LabTests { get; set; }
         public DbSet<MedicalVisit> MedicalVisits { get; set; }
         public DbSet<Pathology> Pathologies { get; set; }
-        public  DbSet<PrescriptionDrug> PrescriptionDrug { get; set; }
+        public DbSet<PrescriptionDrug> PrescriptionDrug { get; set; }
         public DbSet<Radiology> Radiologies { get; set; }
         public DbSet<Surgeries> Surgeries { get; set; }
         public DbSet<Vaccines> Vaccines { get; set; }
         public DbSet<VaccineConsultation> VaccineConsultations { get; set; }
-        public DbSet<AllergyConsultation> AllergyConsultations { get; set; }
-
+        public DbSet<Note> Notes { get; set; }
     }
 }
