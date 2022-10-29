@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:one_health_project/classes/classes.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:one_health_project/Widgets/text_fields.dart';
 
 class CreateAccountCPage extends StatefulWidget {
   static String id = 'create_account_client_page';
@@ -71,29 +72,7 @@ class _CreateAccountCPage extends State<CreateAccountCPage> {
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           return Container(
               padding: EdgeInsets.symmetric(horizontal: 20.0),
-              child: TextField(
-                controller: emailTEC,
-                keyboardType: TextInputType.emailAddress,
-                cursorColor: Colors.red[900],
-                style: TextStyle(color: Colors.white, fontFamily: 'Inter',),
-                decoration: InputDecoration(
-                    hoverColor: Colors.red[900],
-
-                    focusColor: Colors.red[900],
-                    icon: Icon(Icons.email, color: Colors.white,),
-                    hintText: 'ejemplo@correo.com',
-                    hintStyle: TextStyle(color: Colors.white,
-                        fontFamily: 'Inter',
-                        fontWeight: FontWeight.bold),
-                    labelStyle: TextStyle(color: Colors.white,
-                        fontFamily: 'Inter',
-                        fontWeight: FontWeight.bold),
-                    labelText: 'Correo'
-                ),
-                onChanged: (value) {
-
-                },
-              )
+              child: basicTextField()
           );
         }
     );
@@ -342,12 +321,13 @@ class _CreateAccountCPage extends State<CreateAccountCPage> {
 
               if(_email != ''&&(_password == _confirmpassword )!= ''&&_name != ''&&_lastname != ''&&_phone != '')
                 {
-                  User NewUser = User(name: _name, user_id: _email, password: _password, phone: _phone, lastname: _lastname);
-                  NewUser.toJson();
-                  if(register(NewUser) as bool) {
-                    Navigator.pushNamedAndRemoveUntil(
-                        context, 'home_page', (route) => false);
-                  }
+                  print('creating user');
+
+                 register( _name, _email, _password, _phone, _lastname) ;
+                 
+
+
+
 
 
                 }
@@ -370,10 +350,19 @@ class _CreateAccountCPage extends State<CreateAccountCPage> {
 
 }
 
-Future<bool> register(User blah) async{
+Future<bool> register(String _name,String _email,String _password,String _phone,String _lastname) async{
   const url = 'https://onehealth-prod-onehealth-dkbuug.mo2.mogenius.io/api/account/register';
 
-  var jsonBody = jsonEncode(blah);
+  var jsonBody = jsonEncode({
+   "email":  _email,
+    "firstName":_name,
+    "lastName": _lastname,
+    "phoneNumber" :_phone,
+    "password": _password,
+    "passwordSHA1": "1",
+
+
+  });
 
   final response = await http.post(
       Uri.parse(url),
