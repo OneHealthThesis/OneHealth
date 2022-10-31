@@ -16,7 +16,7 @@ namespace PetHealth.Core.Entities
         [ForeignKey("PetId")] public Pet Pet { get; set; }
         [ForeignKey("PersonId")] public ApplicationUser Person { get; set; }
         [Required] public DateTime Date { get; set; }
-        public string Vaccine { get; set; }
+        public long VaccineId { get; set; }
         public string Place { get; set; }
         public string Doctor { get; set; }
         public string Notes { get; set; }

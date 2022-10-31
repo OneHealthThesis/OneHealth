@@ -15,7 +15,7 @@ namespace PetHealth.Core.Entities
         [Required] public long PetId { get; set; }
 
         [Required] public DateTime Date { get; set; }
-        [Required] public string Allergic { get; set; }
+        [Required] public long AllergyId { get; set; }
         public string Notes { get; set; }
 
         [ForeignKey("PetId")] public Pet Pet { get; set; }

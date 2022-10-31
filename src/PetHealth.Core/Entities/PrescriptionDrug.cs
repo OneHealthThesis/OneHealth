@@ -12,7 +12,7 @@ namespace dotnetapp.PetHealth.PetHealth.src.PetHealth.Core.Entities
         [ForeignKey("PetId")] public Pet Pet { get; set; }
         [ForeignKey("PersonId")] public ApplicationUser Person { get; set; }
         [Required] public DateTime Date { get; set; }
-        [Required] public string Drug { get; set; }
+        [Required] public long DrugId { get; set; }
         public string Place { get; set; }
         public string Doctor { get; set; }
         public string Notes { get; set; }
