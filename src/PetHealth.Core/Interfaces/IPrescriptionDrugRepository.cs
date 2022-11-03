@@ -7,12 +7,12 @@ using PetHealth.Core.Entities;
 
 namespace PetHealth.Core.Interfaces
 {
-    public interface IAllergiesRepository: IRepository<Allergies>
+    public interface IPrescriptionDrugRepository: IRepository<PrescriptionDrug>
     {
-        public new IQueryable<Allergies> GetAll();
-        public Allergies GetById(long id);
-        public new void AddEntity(Allergies entity);
-        public new void UpdateEntity(Allergies current, Allergies update);
-        public new void DeleteEntity(Allergies entity);
+        public new IQueryable<PrescriptionDrug> GetAll();
+        public PrescriptionDrug GetById(long id);
+        public new void AddEntity(PrescriptionDrug entity);
+        public new void UpdateEntity(PrescriptionDrug current, PrescriptionDrug update);
+        public new void DeleteEntity(PrescriptionDrug entity);
     }
 }
