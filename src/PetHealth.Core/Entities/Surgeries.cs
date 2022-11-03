@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using PetHealth.Core.Entities;
 
-namespace dotnetapp.PetHealth.PetHealth.src.PetHealth.Core.Entities
+namespace PetHealth.Core.Entities
 {
     public class Surgeries
     {

@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using PetHealth.Core.Entities;
 
-namespace dotnetapp.PetHealth.PetHealth.src.PetHealth.Core.Entities
+namespace PetHealth.Core.Entities
 {
     public class PrescriptionDrug
     {
@@ -16,5 +16,6 @@ namespace dotnetapp.PetHealth.PetHealth.src.PetHealth.Core.Entities
         public string Place { get; set; }
         public string Doctor { get; set; }
         public string Notes { get; set; }
+        [ForeignKey("DrugId")] private Drug Drug { get; set;}
     }
 }

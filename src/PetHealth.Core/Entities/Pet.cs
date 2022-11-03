@@ -22,5 +22,7 @@ namespace PetHealth.Core.Entities
 
         public string BloodType { get; set; }
 
+        public virtual ICollection<ApplicationUser> Users { get; set; }
+
     }
 }

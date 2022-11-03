@@ -4,10 +4,9 @@ using PetHealth.Core.Entities;
 
 namespace PetHealth.Core.Entities
 {
-    public class Allergies
+    public class Disease
     {
-        [Key] public long AllergyId { get; set; }
-        [Required] public string Name{ get; set; }
-        
+        [Key] public long DiseaseId { get; set; }
+        [Required] public string Name { get; set; }
     }
 }

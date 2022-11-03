@@ -20,6 +20,7 @@ namespace PetHealth.Core.Entities
 
         [ForeignKey("PetId")] public Pet Pet { get; set; }
         [ForeignKey("PersonId")] public ApplicationUser Person { get; set; }
+        [ForeignKey("AllergyId")] public Allergies Allergy { get; set; }
     }
 }
 

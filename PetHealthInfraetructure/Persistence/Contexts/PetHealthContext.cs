@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using dotnetapp.PetHealth.PetHealth.src.PetHealth.Core.Entities;
 
 namespace PetHealth.Infrastructure.Persistence.Contexts
 {
@@ -38,6 +37,8 @@ namespace PetHealth.Infrastructure.Persistence.Contexts
 
         public DbSet<Allergies> Allergies { get; set; }
         public DbSet<AllergyConsultation> AllergyConsultations { get; set; }
+        public DbSet<Condition> Condition { get; set; }
+        public DbSet<Disease> Diseases { get; set; }
         public DbSet<Drug> Drugs { get; set; }
         public DbSet<LabTest> LabTests { get; set; }
         public DbSet<MedicalVisit> MedicalVisits { get; set; }

@@ -22,293 +22,19 @@ namespace PetHealth.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("dotnetapp.PetHealth.PetHealth.src.PetHealth.Core.Entities.Allergies", b =>
+            modelBuilder.Entity("ApplicationUserPet", b =>
                 {
-                    b.Property<long>("AllergyId")
-                        .ValueGeneratedOnAdd()
+                    b.Property<long>("PetsPetID")
                         .HasColumnType("bigint");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("AllergyId"), 1L, 1);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("AllergyId");
-
-                    b.ToTable("Allergies");
-                });
-
-            modelBuilder.Entity("dotnetapp.PetHealth.PetHealth.src.PetHealth.Core.Entities.LabTest", b =>
-                {
-                    b.Property<string>("Id")
+                    b.Property<string>("UsersId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
+                    b.HasKey("PetsPetID", "UsersId");
 
-                    b.Property<string>("Doctor")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.HasIndex("UsersId");
 
-                    b.Property<bool>("Normal")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Notes")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PersonId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<long>("PetId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Place")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Result")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Test")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PersonId");
-
-                    b.HasIndex("PetId");
-
-                    b.ToTable("LabTests");
-                });
-
-            modelBuilder.Entity("dotnetapp.PetHealth.PetHealth.src.PetHealth.Core.Entities.MedicalVisit", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Doctor")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Notes")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PersonId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<long>("PetId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Place")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PersonId");
-
-                    b.HasIndex("PetId");
-
-                    b.ToTable("MedicalVisits");
-                });
-
-            modelBuilder.Entity("dotnetapp.PetHealth.PetHealth.src.PetHealth.Core.Entities.Pathology", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Doctor")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Notes")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PersonId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<long>("PetId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Place")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Result")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PersonId");
-
-                    b.HasIndex("PetId");
-
-                    b.ToTable("Pathologies");
-                });
-
-            modelBuilder.Entity("dotnetapp.PetHealth.PetHealth.src.PetHealth.Core.Entities.PrescriptionDrug", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Doctor")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Drug")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Notes")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PersonId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<long>("PetId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Place")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PersonId");
-
-                    b.HasIndex("PetId");
-
-                    b.ToTable("PrescriptionDrug");
-                });
-
-            modelBuilder.Entity("dotnetapp.PetHealth.PetHealth.src.PetHealth.Core.Entities.Radiology", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Doctor")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Notes")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PersonId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<long>("PetId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Place")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Result")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PersonId");
-
-                    b.HasIndex("PetId");
-
-                    b.ToTable("Radiologies");
-                });
-
-            modelBuilder.Entity("dotnetapp.PetHealth.PetHealth.src.PetHealth.Core.Entities.Surgeries", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Doctor")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Notes")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PersonId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<long>("PetId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Place")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Result")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PersonId");
-
-                    b.HasIndex("PetId");
-
-                    b.ToTable("Surgeries");
-                });
-
-            modelBuilder.Entity("dotnetapp.PetHealth.PetHealth.src.PetHealth.Core.Entities.Vaccines", b =>
-                {
-                    b.Property<long>("VaccineId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("VaccineId"), 1L, 1);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("VaccineId");
-
-                    b.ToTable("Vaccines");
+                    b.ToTable("ApplicationUserPet");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -417,14 +143,30 @@ namespace PetHealth.Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("PetHealth.Core.Entities.Allergies", b =>
+                {
+                    b.Property<long>("AllergyId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("AllergyId"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("AllergyId");
+
+                    b.ToTable("Allergies");
+                });
+
             modelBuilder.Entity("PetHealth.Core.Entities.AllergyConsultation", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Allergic")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<long>("AllergyId")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
@@ -441,6 +183,8 @@ namespace PetHealth.Infrastructure.Migrations
                         .HasColumnType("bigint");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AllergyId");
 
                     b.HasIndex("PersonId");
 
@@ -491,6 +235,9 @@ namespace PetHealth.Infrastructure.Migrations
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<long>("PetId")
+                        .HasColumnType("bigint");
+
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -508,6 +255,10 @@ namespace PetHealth.Infrastructure.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
+                    b.Property<string>("Version")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")
@@ -519,6 +270,248 @@ namespace PetHealth.Infrastructure.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+                });
+
+            modelBuilder.Entity("PetHealth.Core.Entities.Condition", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long>("DiseaseId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Doctor")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Notes")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PersonId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<long>("PetId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Place")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DiseaseId");
+
+                    b.HasIndex("PersonId");
+
+                    b.HasIndex("PetId");
+
+                    b.ToTable("Condition");
+                });
+
+            modelBuilder.Entity("PetHealth.Core.Entities.Disease", b =>
+                {
+                    b.Property<long>("DiseaseId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("DiseaseId"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("DiseaseId");
+
+                    b.ToTable("Diseases");
+                });
+
+            modelBuilder.Entity("PetHealth.Core.Entities.Drug", b =>
+                {
+                    b.Property<long>("DrugId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("DrugId"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("DrugId");
+
+                    b.ToTable("Drugs");
+                });
+
+            modelBuilder.Entity("PetHealth.Core.Entities.LabTest", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Doctor")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Normal")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Notes")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PersonId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<long>("PetId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Place")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Result")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Test")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PersonId");
+
+                    b.HasIndex("PetId");
+
+                    b.ToTable("LabTests");
+                });
+
+            modelBuilder.Entity("PetHealth.Core.Entities.MedicalVisit", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Doctor")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Notes")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PersonId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<long>("PetId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Place")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PersonId");
+
+                    b.HasIndex("PetId");
+
+                    b.ToTable("MedicalVisits");
+                });
+
+            modelBuilder.Entity("PetHealth.Core.Entities.Note", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Doctor")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Notes")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PersonId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<long>("PetId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Place")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PersonId");
+
+                    b.HasIndex("PetId");
+
+                    b.ToTable("Notes");
+                });
+
+            modelBuilder.Entity("PetHealth.Core.Entities.Pathology", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Doctor")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Notes")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PersonId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<long>("PetId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Place")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Result")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PersonId");
+
+                    b.HasIndex("PetId");
+
+                    b.ToTable("Pathologies");
                 });
 
             modelBuilder.Entity("PetHealth.Core.Entities.Permission", b =>
@@ -585,6 +578,89 @@ namespace PetHealth.Infrastructure.Migrations
                     b.ToTable("Pets");
                 });
 
+            modelBuilder.Entity("PetHealth.Core.Entities.PrescriptionDrug", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Doctor")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long>("DrugId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Notes")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PersonId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<long>("PetId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Place")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PersonId");
+
+                    b.HasIndex("PetId");
+
+                    b.ToTable("PrescriptionDrug");
+                });
+
+            modelBuilder.Entity("PetHealth.Core.Entities.Radiology", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Doctor")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Notes")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PersonId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<long>("PetId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Place")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Result")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PersonId");
+
+                    b.HasIndex("PetId");
+
+                    b.ToTable("Radiologies");
+                });
+
             modelBuilder.Entity("PetHealth.Core.Entities.Role", b =>
                 {
                     b.Property<string>("Id")
@@ -642,6 +718,50 @@ namespace PetHealth.Infrastructure.Migrations
                     b.ToTable("RolePermissions");
                 });
 
+            modelBuilder.Entity("PetHealth.Core.Entities.Surgeries", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Doctor")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Notes")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PersonId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<long>("PetId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Place")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Result")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PersonId");
+
+                    b.HasIndex("PetId");
+
+                    b.ToTable("Surgeries");
+                });
+
             modelBuilder.Entity("PetHealth.Core.Entities.UserPermission", b =>
                 {
                     b.Property<int>("Id")
@@ -693,9 +813,8 @@ namespace PetHealth.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Vaccine")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<long>("VaccineId")
+                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
@@ -706,118 +825,36 @@ namespace PetHealth.Infrastructure.Migrations
                     b.ToTable("VaccineConsultations");
                 });
 
-            modelBuilder.Entity("dotnetapp.PetHealth.PetHealth.src.PetHealth.Core.Entities.LabTest", b =>
+            modelBuilder.Entity("PetHealth.Core.Entities.Vaccines", b =>
                 {
-                    b.HasOne("PetHealth.Core.Entities.ApplicationUser", "Person")
-                        .WithMany()
-                        .HasForeignKey("PersonId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<long>("VaccineId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
 
-                    b.HasOne("PetHealth.Core.Entities.Pet", "Pet")
-                        .WithMany()
-                        .HasForeignKey("PetId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("VaccineId"), 1L, 1);
 
-                    b.Navigation("Person");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Navigation("Pet");
+                    b.HasKey("VaccineId");
+
+                    b.ToTable("Vaccines");
                 });
 
-            modelBuilder.Entity("dotnetapp.PetHealth.PetHealth.src.PetHealth.Core.Entities.MedicalVisit", b =>
+            modelBuilder.Entity("ApplicationUserPet", b =>
                 {
-                    b.HasOne("PetHealth.Core.Entities.ApplicationUser", "Person")
+                    b.HasOne("PetHealth.Core.Entities.Pet", null)
                         .WithMany()
-                        .HasForeignKey("PersonId")
+                        .HasForeignKey("PetsPetID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("PetHealth.Core.Entities.Pet", "Pet")
+                    b.HasOne("PetHealth.Core.Entities.ApplicationUser", null)
                         .WithMany()
-                        .HasForeignKey("PetId")
+                        .HasForeignKey("UsersId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Person");
-
-                    b.Navigation("Pet");
-                });
-
-            modelBuilder.Entity("dotnetapp.PetHealth.PetHealth.src.PetHealth.Core.Entities.Pathology", b =>
-                {
-                    b.HasOne("PetHealth.Core.Entities.ApplicationUser", "Person")
-                        .WithMany()
-                        .HasForeignKey("PersonId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("PetHealth.Core.Entities.Pet", "Pet")
-                        .WithMany()
-                        .HasForeignKey("PetId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Person");
-
-                    b.Navigation("Pet");
-                });
-
-            modelBuilder.Entity("dotnetapp.PetHealth.PetHealth.src.PetHealth.Core.Entities.PrescriptionDrug", b =>
-                {
-                    b.HasOne("PetHealth.Core.Entities.ApplicationUser", "Person")
-                        .WithMany()
-                        .HasForeignKey("PersonId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("PetHealth.Core.Entities.Pet", "Pet")
-                        .WithMany()
-                        .HasForeignKey("PetId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Person");
-
-                    b.Navigation("Pet");
-                });
-
-            modelBuilder.Entity("dotnetapp.PetHealth.PetHealth.src.PetHealth.Core.Entities.Radiology", b =>
-                {
-                    b.HasOne("PetHealth.Core.Entities.ApplicationUser", "Person")
-                        .WithMany()
-                        .HasForeignKey("PersonId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("PetHealth.Core.Entities.Pet", "Pet")
-                        .WithMany()
-                        .HasForeignKey("PetId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Person");
-
-                    b.Navigation("Pet");
-                });
-
-            modelBuilder.Entity("dotnetapp.PetHealth.PetHealth.src.PetHealth.Core.Entities.Surgeries", b =>
-                {
-                    b.HasOne("PetHealth.Core.Entities.ApplicationUser", "Person")
-                        .WithMany()
-                        .HasForeignKey("PersonId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("PetHealth.Core.Entities.Pet", "Pet")
-                        .WithMany()
-                        .HasForeignKey("PetId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Person");
-
-                    b.Navigation("Pet");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -873,6 +910,117 @@ namespace PetHealth.Infrastructure.Migrations
 
             modelBuilder.Entity("PetHealth.Core.Entities.AllergyConsultation", b =>
                 {
+                    b.HasOne("PetHealth.Core.Entities.Allergies", "Allergy")
+                        .WithMany()
+                        .HasForeignKey("AllergyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PetHealth.Core.Entities.ApplicationUser", "Person")
+                        .WithMany()
+                        .HasForeignKey("PersonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PetHealth.Core.Entities.Pet", "Pet")
+                        .WithMany()
+                        .HasForeignKey("PetId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Allergy");
+
+                    b.Navigation("Person");
+
+                    b.Navigation("Pet");
+                });
+
+            modelBuilder.Entity("PetHealth.Core.Entities.Condition", b =>
+                {
+                    b.HasOne("PetHealth.Core.Entities.Disease", "Disease")
+                        .WithMany()
+                        .HasForeignKey("DiseaseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PetHealth.Core.Entities.ApplicationUser", "Person")
+                        .WithMany()
+                        .HasForeignKey("PersonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PetHealth.Core.Entities.Pet", "Pet")
+                        .WithMany()
+                        .HasForeignKey("PetId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Disease");
+
+                    b.Navigation("Person");
+
+                    b.Navigation("Pet");
+                });
+
+            modelBuilder.Entity("PetHealth.Core.Entities.LabTest", b =>
+                {
+                    b.HasOne("PetHealth.Core.Entities.ApplicationUser", "Person")
+                        .WithMany()
+                        .HasForeignKey("PersonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PetHealth.Core.Entities.Pet", "Pet")
+                        .WithMany()
+                        .HasForeignKey("PetId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Person");
+
+                    b.Navigation("Pet");
+                });
+
+            modelBuilder.Entity("PetHealth.Core.Entities.MedicalVisit", b =>
+                {
+                    b.HasOne("PetHealth.Core.Entities.ApplicationUser", "Person")
+                        .WithMany()
+                        .HasForeignKey("PersonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PetHealth.Core.Entities.Pet", "Pet")
+                        .WithMany()
+                        .HasForeignKey("PetId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Person");
+
+                    b.Navigation("Pet");
+                });
+
+            modelBuilder.Entity("PetHealth.Core.Entities.Note", b =>
+                {
+                    b.HasOne("PetHealth.Core.Entities.ApplicationUser", "Person")
+                        .WithMany()
+                        .HasForeignKey("PersonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PetHealth.Core.Entities.Pet", "Pet")
+                        .WithMany()
+                        .HasForeignKey("PetId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Person");
+
+                    b.Navigation("Pet");
+                });
+
+            modelBuilder.Entity("PetHealth.Core.Entities.Pathology", b =>
+                {
                     b.HasOne("PetHealth.Core.Entities.ApplicationUser", "Person")
                         .WithMany()
                         .HasForeignKey("PersonId")
@@ -909,6 +1057,44 @@ namespace PetHealth.Infrastructure.Migrations
                     b.Navigation("Pet");
                 });
 
+            modelBuilder.Entity("PetHealth.Core.Entities.PrescriptionDrug", b =>
+                {
+                    b.HasOne("PetHealth.Core.Entities.ApplicationUser", "Person")
+                        .WithMany()
+                        .HasForeignKey("PersonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PetHealth.Core.Entities.Pet", "Pet")
+                        .WithMany()
+                        .HasForeignKey("PetId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Person");
+
+                    b.Navigation("Pet");
+                });
+
+            modelBuilder.Entity("PetHealth.Core.Entities.Radiology", b =>
+                {
+                    b.HasOne("PetHealth.Core.Entities.ApplicationUser", "Person")
+                        .WithMany()
+                        .HasForeignKey("PersonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PetHealth.Core.Entities.Pet", "Pet")
+                        .WithMany()
+                        .HasForeignKey("PetId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Person");
+
+                    b.Navigation("Pet");
+                });
+
             modelBuilder.Entity("PetHealth.Core.Entities.RolePermission", b =>
                 {
                     b.HasOne("PetHealth.Core.Entities.Permission", "Permission")
@@ -926,6 +1112,25 @@ namespace PetHealth.Infrastructure.Migrations
                     b.Navigation("Permission");
 
                     b.Navigation("Role");
+                });
+
+            modelBuilder.Entity("PetHealth.Core.Entities.Surgeries", b =>
+                {
+                    b.HasOne("PetHealth.Core.Entities.ApplicationUser", "Person")
+                        .WithMany()
+                        .HasForeignKey("PersonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PetHealth.Core.Entities.Pet", "Pet")
+                        .WithMany()
+                        .HasForeignKey("PetId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Person");
+
+                    b.Navigation("Pet");
                 });
 
             modelBuilder.Entity("PetHealth.Core.Entities.UserPermission", b =>
