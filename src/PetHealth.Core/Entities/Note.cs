@@ -1,9 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using PetHealth.Core.Interfaces;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PetHealth.Core.Entities
 {
-    public class Note
+    public class Note: IEntity<string>
     {
         [Key] public string Id { get; set; }
         [Required] public string PersonId { get; set; }

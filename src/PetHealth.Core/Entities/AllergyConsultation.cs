@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PetHealth.Core.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace PetHealth.Core.Entities
 {
-    public class AllergyConsultation
+    public class AllergyConsultation: IEntity<string>
     {
         [Key] public string Id { get; set; }
         [Required] public string PersonId { get; set; }

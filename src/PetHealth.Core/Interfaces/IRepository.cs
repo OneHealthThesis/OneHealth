@@ -14,4 +14,13 @@ namespace PetHealth.Core.Interfaces
         public void UpdateEntity(TEntity current, TEntity update);
         public void DeleteEntity(TEntity entity);
     }
+
+    public interface IRepository<TEntity, TKey> where TEntity : IEntity<TKey>
+    {
+        public IQueryable<TEntity> GetAll();
+        public TEntity GetById(TKey Id);
+        public void AddEntity(TEntity entity);
+        public void UpdateEntity(TEntity current, TEntity update);
+        public void DeleteEntity(TEntity entity);
+    }
 }
