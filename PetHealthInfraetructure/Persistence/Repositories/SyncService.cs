@@ -19,7 +19,7 @@ namespace PetHealth.Infrastructure.Persistence.Repositories
             _context = contex;
         }
 
-        public async Task SynchroniceGet(SynchroDataDTO synchroData)
+        public async Task SynchroniceSet(SynchroDataDTO synchroData)
         {
             foreach (var entity in synchroData.Allergies)
             {
@@ -127,7 +127,6 @@ namespace PetHealth.Infrastructure.Persistence.Repositories
                 };
                 _context.Notes.Add(temp);
             }
-          
 
             foreach (var pathology in synchroData.Pathology)
             {
@@ -200,7 +199,7 @@ namespace PetHealth.Infrastructure.Persistence.Repositories
             {
                 Vaccines temp = new Vaccines()
                 {
-                    VaccineId = vaccine.Id,
+                    Id = vaccine.Id,
                     Name = vaccine.Name
                 };
                 _context.Vaccines.Add(temp);
@@ -224,7 +223,7 @@ namespace PetHealth.Infrastructure.Persistence.Repositories
           _context.SaveChanges();
         }
 
-        public async Task<SynchroDataDTO> SynchroniceSet()
+        public async Task<SynchroDataDTO> SynchroniceGet()
         {
             throw new NotImplementedException();
         }
