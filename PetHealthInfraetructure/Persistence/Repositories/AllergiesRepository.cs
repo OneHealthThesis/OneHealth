@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using PetHealth.Core.Entities;
 using PetHealth.Core.Interfaces;
+using PetHealth.Core.Interfaces.CoreInterfaces;
 using PetHealth.Infrastructure.Persistence.Contexts;
 
 namespace PetHealth.Infrastructure.Persistence.Repositories

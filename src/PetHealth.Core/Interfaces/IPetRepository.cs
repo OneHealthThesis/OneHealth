@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using PetHealth.Core.Entities;
+using PetHealth.Core.Interfaces.CoreInterfaces;
 
 namespace PetHealth.Core.Interfaces
 {
