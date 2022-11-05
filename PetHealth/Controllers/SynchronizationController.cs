@@ -6,7 +6,7 @@ using PetHealth.Infrastructure.Persistence.Contexts;
 namespace PetHealth.Controllers
 {
     [Produces("application/json")]
-    [Route("api/sync"), ResponseCache(NoStore = true)]
+    [Route("api/[controller]"), ResponseCache(NoStore = true)]
     [ApiController]
     public class SynchronizationController : Controller
     {
@@ -20,8 +20,8 @@ namespace PetHealth.Controllers
 
 
         [HttpPost]
-        [Route("data")]
-        public async Task<IActionResult> Synchronice([
+        [Route("get")]
+        public async Task<IActionResult> SynchroniceGet([
             FromBody]SynchroDataDTO synchroDataDTO
             )
 
