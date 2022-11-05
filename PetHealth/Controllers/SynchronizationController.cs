@@ -6,7 +6,7 @@ using PetHealth.Infrastructure.Persistence.Contexts;
 namespace PetHealth.Controllers
 {
     [Produces("application/json")]
-    [Route("api/[controller]"), ResponseCache(NoStore = true)]
+    [Route("api/sync"), ResponseCache(NoStore = true)]
     [ApiController]
     public class SynchronizationController : Controller
     {
