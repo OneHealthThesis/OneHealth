@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using PetHealth.Core.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -9,10 +10,14 @@ using System.Threading.Tasks;
 
 namespace PetHealth.Core.Entities
 {
-    public class ApplicationUser: IdentityUser<string>
+    public class ApplicationUser: IdentityUser<string>, ISynchronizable
     {
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
+
+        // Date when the entry was saved to de database.
+        public DateTime CreatedOnDBDate { get; private set; }
+        public DateTime? LastSynchronized { get; set; } 
 
         [Required]
         public string PhoneNumber { get; set; }
