@@ -1,5 +1,4 @@
-﻿
-using PetHealth.Core.Interfaces;
+﻿using PetHealth.Core.Interfaces.CoreInterfaces;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 

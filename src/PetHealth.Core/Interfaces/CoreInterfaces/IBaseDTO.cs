@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PetHealth.Core.Interfaces
+namespace PetHealth.Core.Interfaces.CoreInterfaces
 {
-    public interface IEntity<TKey>
+    public interface IBaseDTO
     {
-        TKey Id { get; set; }
     }
 }
