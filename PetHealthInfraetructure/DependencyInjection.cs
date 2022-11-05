@@ -17,6 +17,7 @@ namespace PetHealth.Infrastructure
                 options.UseSqlServer(defaultConnectionString));
             //services.AddScoped<IPersonService, PersonService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped< ISyncService, SyncService>();
             return services;
         }
     }
