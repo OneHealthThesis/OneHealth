@@ -20,13 +20,24 @@ namespace PetHealth.Controllers
 
 
         [HttpPost]
-        [Route("get")]
-        public async Task<IActionResult> SynchroniceGet([
+        [Route("set")]
+        public async Task<IActionResult> SynchroniceSet([
             FromBody]SynchroDataDTO synchroDataDTO
             )
 
         {
-            await _syncService.SynchroniceGet(synchroDataDTO);
+            await _syncService.SynchroniceSet(synchroDataDTO);
+            return Ok();
+        }
+
+        [HttpPost]
+        [Route("get")]
+        public async Task<IActionResult> SynchroniceGet(
+           
+           )
+
+        {
+            await _syncService.SynchroniceGet();
             return Ok();
         }
     }
