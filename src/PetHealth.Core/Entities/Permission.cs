@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PetHealth.Core.Interfaces.CoreInterfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PetHealth.Core.Entities
 {
-    public class Permission
+    public class Permission : IEntity<int>
     {
         public Permission() { }
 

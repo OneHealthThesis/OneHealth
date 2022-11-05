@@ -110,8 +110,8 @@ namespace PetHealth.Infrastructure.Persistence.Repositories
             var addedPet2 = this._context.Pets.Add(pet2);
             await this._context.SaveChangesAsync(cancellationToken);
 
-            this._context.PersonHasPet.Add(new Person_Pet { PersonId = user.Id, PetId = pet1.PetID });
-            this._context.PersonHasPet.Add(new Person_Pet { PersonId = user.Id, PetId = pet2.PetID });
+            this._context.PersonHasPet.Add(new Person_Pet { PersonId = user.Id, PetId = pet1.Id });
+            this._context.PersonHasPet.Add(new Person_Pet { PersonId = user.Id, PetId = pet2.Id });
 
             await this._context.SaveChangesAsync(cancellationToken);
 

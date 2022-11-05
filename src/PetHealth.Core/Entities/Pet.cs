@@ -5,12 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using PetHealth.Core.Interfaces.CoreInterfaces;
 
 namespace PetHealth.Core.Entities
 {
-    public class Pet
+    public class Pet: IEntity<long>
     {
-        [Key] public long PetID { get; set; }
+        [Key][Column("PetID")] public long Id { get; set; }
 
         public string Name { get; set; }
         
