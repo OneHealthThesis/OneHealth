@@ -1,10 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using PetHealth.Core.Entities;
+using PetHealth.Core.Interfaces;
+using PetHealth.Core.Interfaces.CoreInterfaces;
 
 namespace PetHealth.Core.Entities
 {
-    public class Radiology
+    public class Radiology: IEntity<string>, ISynchronizable
     {
         [Key] public string Id { get; set; }
         [Required] public string PersonId { get; set; }
@@ -12,6 +14,9 @@ namespace PetHealth.Core.Entities
         [ForeignKey("PetId")] public Pet Pet { get; set; }
         [ForeignKey("PersonId")] public ApplicationUser Person { get; set; }
         [Required] public DateTime Date { get; set; }
+
+        // Date when the entry was saved to de database.
+        public DateTime CreatedOnDBDate { get; private set; }
         public string Title { get; set; }
         public string Result { get; set; }
         public string Place { get; set; }

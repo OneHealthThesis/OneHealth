@@ -1,10 +1,11 @@
-﻿using PetHealth.Core.Interfaces.CoreInterfaces;
+﻿using PetHealth.Core.Interfaces;
+using PetHealth.Core.Interfaces.CoreInterfaces;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PetHealth.Core.Entities
 {
-    public class Note: IEntity<string>
+    public class Note: IEntity<string>, ISynchronizable
     {
         [Key] public string Id { get; set; }
         [Required] public string PersonId { get; set; }
@@ -12,6 +13,9 @@ namespace PetHealth.Core.Entities
         [ForeignKey("PetId")] public Pet Pet { get; set; }
         [ForeignKey("PersonId")] public ApplicationUser Person { get; set; }
         [Required] public DateTime Date { get; set; }
+
+        // Date when the entry was saved to de database.
+        public DateTime CreatedOnDBDate { get; private set; }
         public string Title { get; set; }
         public string Place { get; set; }
         public string Doctor { get; set; }
