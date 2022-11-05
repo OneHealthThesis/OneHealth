@@ -21,6 +21,7 @@ namespace PetHealth.Infrastructure
             services.AddScoped<IDataService<IPetHealthContext>, DataService<IPetHealthContext>>();
             
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped< ISyncService, SyncService>();
             return services;
         }
 
