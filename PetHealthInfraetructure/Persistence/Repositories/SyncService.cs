@@ -224,9 +224,10 @@ namespace PetHealth.Infrastructure.Persistence.Repositories
           _context.SaveChanges();
         }
 
-        public async Task<SynchroDataDTO> SynchroniceGet(ISynchronizable sync)
+        public async Task<SynchroDataDTO> SynchroniceGet()
         {
-            DateTime dateUpdate = sync.CreatedOnDBDate;
+            DateTime dateUpdate = DateTime.MinValue;
+           
             SynchroDataDTO synchroDataDTO = new SynchroDataDTO();
 
             foreach (var item in _context.AllergyConsultations.Where(data => data.Date > dateUpdate))
