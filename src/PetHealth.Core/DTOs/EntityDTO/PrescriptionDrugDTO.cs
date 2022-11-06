@@ -16,5 +16,16 @@ namespace PetHealth.Core.DTOs.EntityDTO
         public string Doctor { get; set; }
         public string Notes { get; set; }
 
+        public PrescriptionDrugDTO(PrescriptionDrug prescriptionDrug)
+        {
+            Id = prescriptionDrug.Id;
+            PersonId = prescriptionDrug.PersonId;
+            PetId = prescriptionDrug.PetId;
+            Date = prescriptionDrug.Date;
+            DrugId = prescriptionDrug.DrugId;
+            Place = prescriptionDrug.Place;
+            Doctor = prescriptionDrug.Doctor;
+            Notes = prescriptionDrug.Notes;
+        }
     }
 }

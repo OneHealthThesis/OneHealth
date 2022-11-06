@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using PetHealth.Core.DTOs;
+using PetHealth.Core.DTOs.EntityDTO;
 using PetHealth.Core.Entities;
 using PetHealth.Core.Interfaces;
 using PetHealth.Infrastructure.Persistence.Contexts;
@@ -223,9 +224,42 @@ namespace PetHealth.Infrastructure.Persistence.Repositories
           _context.SaveChanges();
         }
 
-        public async Task<SynchroDataDTO> SynchroniceGet()
+        public async Task<SynchroDataDTO> SynchroniceGet(ISynchronizable sync)
         {
-            throw new NotImplementedException();
+            DateTime dateUpdate = sync.CreatedOnDBDate;
+            SynchroDataDTO synchroDataDTO = new SynchroDataDTO();
+
+            foreach (var item in _context.AllergyConsultations.Where(data => data.Date > dateUpdate))
+                synchroDataDTO.AllergyConsultation.Add(new AllergyConsultationDTO(item));
+
+            foreach (var item in _context.Condition.Where(data => data.Date > dateUpdate))
+                synchroDataDTO.Condition.Add(new ConditionDTO(item));
+
+            foreach (var item in _context.LabTests.Where(data => data.Date > dateUpdate))
+                synchroDataDTO.LabTest.Add(new LabTestDTO(item));
+
+            foreach (var item in _context.MedicalVisits.Where(data => data.Date > dateUpdate))
+                synchroDataDTO.MedicalVisit.Add(new MedicalVisitDTO(item));
+
+            foreach (var item in _context.Notes.Where(data => data.Date > dateUpdate))
+                synchroDataDTO.Note.Add(new NoteDTO(item));
+
+            foreach (var item in _context.Pathologies.Where(data => data.Date > dateUpdate))
+                synchroDataDTO.Pathology.Add(new PathologyDTO(item));
+
+            foreach (var item in _context.PrescriptionDrug.Where(data => data.Date > dateUpdate))
+                synchroDataDTO.PrescriptionDrug.Add(new PrescriptionDrugDTO(item));
+
+            foreach (var item in _context.Radiologies.Where(data => data.Date > dateUpdate))
+                synchroDataDTO.Radiology.Add(new RadiologyDTO(item));
+
+            foreach (var item in _context.Surgeries.Where(data => data.Date > dateUpdate))
+                synchroDataDTO.Surgeries.Add(new SurgeriesDTO(item));
+
+            foreach (var item in _context.VaccineConsultations.Where(data => data.Date > dateUpdate))
+                synchroDataDTO.VaccineConsultation.Add(new VaccineConsultationDTO(item));
+
+            return synchroDataDTO;
         }
     }
 }

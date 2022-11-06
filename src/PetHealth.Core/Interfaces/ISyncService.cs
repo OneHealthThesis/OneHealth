@@ -11,6 +11,6 @@ namespace PetHealth.Core.Interfaces
     public interface ISyncService
     {
        Task SynchroniceSet(SynchroDataDTO synchroData);
-       Task<SynchroDataDTO> SynchroniceGet();
+       Task<SynchroDataDTO> SynchroniceGet(ISynchronizable sync);
     }
 }

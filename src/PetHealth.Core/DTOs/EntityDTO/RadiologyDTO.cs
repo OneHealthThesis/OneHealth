@@ -17,5 +17,17 @@ namespace PetHealth.Core.DTOs.EntityDTO
         public string Doctor { get; set; }
         public string Notes { get; set; }
 
+        public RadiologyDTO(Radiology radiology)
+        {
+            Id = radiology.Id;
+            PersonId = radiology.PersonId;
+            PetId = radiology.PetId;
+            Date = radiology.Date;
+            Title = radiology.Title;
+            Result = radiology.Result;
+            Place = radiology.Place;
+            Doctor = radiology.Doctor;
+            Notes = radiology.Notes;
+        }
     }
 }

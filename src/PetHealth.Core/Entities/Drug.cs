@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PetHealth.Core.Entities
 {
-    public class Drug: IEntity<long>, ISynchronizable
+    public class Drug: IEntity<long>, ISynchronizable, ILongIdName
     {
         [Key][Column("DrugId")] public long Id { get; set; }
         [Required] public string Name{ get; set; }

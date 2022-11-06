@@ -6,13 +6,12 @@ using PetHealth.Core.Interfaces.CoreInterfaces;
 
 namespace PetHealth.Core.Entities
 {
-    public class Allergies: IEntity<long>, ISynchronizable
+    public class Allergies: IEntity<long>, ISynchronizable,ILongIdName
     {
         [Key][Column("AllergyId")] public long Id { get; set; }
         [Required] public string Name{ get; set; }
 
         // Date when the entry was saved to de database.
         public DateTime CreatedOnDBDate { get; private set; }
-
     }
 }

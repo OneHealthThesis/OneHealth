@@ -6,7 +6,7 @@ using PetHealth.Core.Interfaces.CoreInterfaces;
 
 namespace PetHealth.Core.Entities
 {
-    public class Disease: IEntity<long>, ISynchronizable
+    public class Disease: IEntity<long>, ISynchronizable, ILongIdName
     {
         [Key][Column("DiseaseId")] public long Id { get; set; }
         [Required] public string Name { get; set; }
