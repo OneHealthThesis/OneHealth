@@ -15,7 +15,7 @@ namespace PetHealth.Core.Entities
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
 
-        // Date when the entry was saved to de database.
+        // Date when the entry was saved to the database.
         public DateTime CreatedOnDBDate { get; private set; }
         public DateTime? LastSynchronized { get; set; } 
 

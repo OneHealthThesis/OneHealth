@@ -16,7 +16,7 @@ namespace PetHealth.Core.Entities
 
         [Required] public DateTime Date { get; set; }
 
-        // Date when the entry was saved to de database.
+        // Date when the entry was saved to the database.
         public DateTime CreatedOnDBDate { get; private set; }
         public string Title { get; set; }
         public string Result { get; set; }

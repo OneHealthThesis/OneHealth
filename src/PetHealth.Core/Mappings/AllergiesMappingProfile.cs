@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace PetHealth.Core.Mappings
 {
-    public class DiseaseMappingProfile: Profile
+    public class AllergiesMappingProfile: Profile
     {
-        public DiseaseMappingProfile()
+        public AllergiesMappingProfile()
         {
-            CreateMap<LongIdNameDTO, Disease>()
+            CreateMap<LongIdNameDTO, Allergies>()
                 .ForMember(src => src.Id, opt => opt.MapFrom(dto => dto.Id))
                 .ForMember(src => src.Name, opt => opt.MapFrom(dto => dto.Name))
                 .ForMember(src => src.CreatedOnDBDate, opt => opt.Ignore())

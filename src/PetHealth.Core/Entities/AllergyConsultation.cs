@@ -20,7 +20,7 @@ namespace PetHealth.Core.Entities
         [Required] public long AllergyId { get; set; }
         public string Notes { get; set; }
 
-        // Date when the entry was saved to de database.
+        // Date when the entry was saved to the database.
         public DateTime CreatedOnDBDate { get; private set; }
 
         [ForeignKey("PetId")] public Pet Pet { get; set; }

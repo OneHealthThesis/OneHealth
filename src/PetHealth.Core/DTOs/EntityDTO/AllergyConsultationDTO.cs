@@ -9,7 +9,7 @@ namespace PetHealth.Core.DTOs.EntityDTO
 {
     public class AllergyConsultationDTO
     {
-         public string Id { get; set; }
+        public string Id { get; set; }
         public string PersonId { get; set; }
         public long PetId { get; set; }
         public DateTime Date { get; set; }

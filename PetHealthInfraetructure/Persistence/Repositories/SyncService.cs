@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using PetHealth.Core.DTOs;
 using PetHealth.Core.DTOs.EntityDTO;
 using PetHealth.Core.Entities;
@@ -14,10 +15,12 @@ namespace PetHealth.Infrastructure.Persistence.Repositories
     public class SyncService:ISyncService
     {
         private readonly PetHealthContext _context;
+        private readonly IMapper _mapper;
 
-        public SyncService(PetHealthContext contex)
+        public SyncService(PetHealthContext contex, IMapper mapper)
         {
             _context = contex;
+            _mapper = mapper;
         }
 
         public async Task SynchroniceSet(SynchroDataDTO synchroData)
