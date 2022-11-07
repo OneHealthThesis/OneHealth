@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using PetHealth.Core.Entities;
 using PetHealth.Infrastructure.Persistence.Contexts;
+using PetHealth.WebUtilities;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +26,9 @@ builder.Services.AddCore();
 builder.Services.AddInfrastructure(builder.Configuration);
 
 
+// Personalized web utilities.
+builder.Services.AddTransient<GlobalExceptionHandlingMiddleware>();
+
 
 var app = builder.Build();
 
@@ -47,6 +51,7 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.UseMiddleware<GlobalExceptionHandlingMiddleware>();
 app.MapControllers();
 
 app.Run();
