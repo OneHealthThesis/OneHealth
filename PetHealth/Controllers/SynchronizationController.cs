@@ -33,9 +33,7 @@ namespace PetHealth.Controllers
         [HttpPost]
         [Route("get")]
         public async Task<IActionResult> SynchroniceGet(
-           
            )
-
         {
             
             return Ok(await _syncService.SynchroniceGet());

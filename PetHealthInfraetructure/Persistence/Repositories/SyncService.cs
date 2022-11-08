@@ -118,6 +118,18 @@ namespace PetHealth.Infrastructure.Persistence.Repositories
            
             SynchroDataDTO synchroDataDTO = new SynchroDataDTO();
 
+            foreach (var item in _context.Allergies.Where(data => data.CreatedOnDBDate > dateUpdate))
+                synchroDataDTO.Allergies.Add(this._mapper.Map<LongIdNameDTO>(item));
+            
+            foreach (var item in _context.Drugs.Where(data => data.CreatedOnDBDate > dateUpdate))
+                synchroDataDTO.Drug.Add(this._mapper.Map<LongIdNameDTO>(item));
+            
+            foreach (var item in _context.Diseases.Where(data => data.CreatedOnDBDate > dateUpdate))
+                synchroDataDTO.Disease.Add(this._mapper.Map<LongIdNameDTO>(item));
+            
+            foreach (var item in _context.Vaccines.Where(data => data.CreatedOnDBDate > dateUpdate))
+                synchroDataDTO.Vaccines.Add(this._mapper.Map<LongIdNameDTO>(item));
+
             foreach (var item in _context.AllergyConsultations.Where(data => data.CreatedOnDBDate > dateUpdate))
                 synchroDataDTO.AllergyConsultation.Add(this._mapper.Map<AllergyConsultationDTO>(item));
 
