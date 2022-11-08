@@ -24,5 +24,24 @@ namespace PetHealth.Core.DTOs
         public List<SurgeriesDTO> Surgeries { get; set; }
         public List<VaccineConsultationDTO> VaccineConsultation { get; set; }
         public List<LongIdNameDTO> Vaccines { get; set; }
+
+
+        public SynchroDataDTO()
+        {
+            Allergies = new();
+            AllergyConsultation = new();
+            Condition = new();
+            Disease = new();
+            Drug = new();
+            LabTest = new();
+            MedicalVisit = new();
+            Note = new();
+            Pathology = new();
+            PrescriptionDrug = new();
+            Radiology = new();
+            Surgeries = new();
+            VaccineConsultation = new();
+            Vaccines = new();
+        }
     }
 }

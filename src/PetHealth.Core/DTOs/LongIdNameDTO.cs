@@ -12,10 +12,10 @@ namespace PetHealth.Core.DTOs
         public long Id { get; set; }
         public string Name { get; set; }
 
-        public LongIdNameDTO(ILongIdName longIdName)
-        {
-            Id = longIdName.Id;
-            Name = longIdName.Name;
-        }
+        //public LongIdNameDTO(ILongIdName longIdName)
+        //{
+        //    Id = longIdName.Id;
+        //    Name = longIdName.Name;
+        //}
     }
 }

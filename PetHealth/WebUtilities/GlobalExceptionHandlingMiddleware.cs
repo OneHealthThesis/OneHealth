@@ -14,7 +14,7 @@ namespace PetHealth.WebUtilities
     public class GlobalExceptionHandlingMiddleware : IMiddleware
     {
         private readonly ILogger _logger;
-        public GlobalExceptionHandlingMiddleware(RequestDelegate requestDelegate)
+        public GlobalExceptionHandlingMiddleware()
         {
         }
         public async Task InvokeAsync(HttpContext context, RequestDelegate next)
