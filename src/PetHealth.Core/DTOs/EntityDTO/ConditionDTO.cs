@@ -17,16 +17,6 @@ namespace PetHealth.Core.DTOs.EntityDTO
         public string Doctor { get; set; }
         public string Notes { get; set; }
 
-        public ConditionDTO(Condition condition)
-        {
-            Id = condition.Id;
-            PersonId = condition.PersonId;
-            PetId = condition.PetId;
-            DiseaseId = condition.DiseaseId;
-            Date = condition.Date;
-            Place = condition.Place;
-            Doctor = condition.Doctor;
-            Notes = condition.Notes;
-        }
+      
     }
 }

@@ -17,16 +17,6 @@ namespace PetHealth.Core.DTOs.EntityDTO
         public string Doctor { get; set; }
         public string Notes { get; set; }
 
-        public NoteDTO(Note note)
-        {
-            Id = note.Id;
-            PersonId = note.PersonId;
-            PetId = note.PetId;
-            Date = note.Date;
-            Title = note.Title;
-            Place = note.Place;
-            Doctor = note.Doctor;
-            Notes = note.Notes;
-        }
+      
     }
 }

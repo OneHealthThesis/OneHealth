@@ -18,18 +18,6 @@ namespace PetHealth.Core.DTOs.EntityDTO
         public string Doctor { get; set; }
         public string Notes { get; set; }
 
-        public LabTestDTO(LabTest labTest)
-        {
-            Id = labTest.Id;
-            PersonId = labTest.PersonId;
-            PetId = labTest.PetId;
-            Date = labTest.Date;
-            Test = labTest.Test;
-            Result = labTest.Result;
-            Normal = labTest.Normal;
-            Place = labTest.Place;
-            Doctor = labTest.Doctor;
-            Notes = labTest.Notes;
-        }
+     
     }
 }

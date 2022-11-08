@@ -36,7 +36,7 @@ namespace PetHealth.Controllers
            )
         {
             
-            return Ok(await _syncService.SynchroniceGet());
+            return Ok(await _syncService.SynchroniceGet(null));
         }
     }
 }

@@ -18,17 +18,6 @@ namespace PetHealth.Core.DTOs.EntityDTO
         public string Doctor { get; set; }
         public string Notes { get; set; }
 
-        public PathologyDTO(Pathology pathology)
-        {
-            Id = pathology.Id;
-            PersonId = pathology.PersonId;
-            PetId = pathology.PetId;
-            Date = pathology.Date;
-            Title = pathology.Title;
-            Result = pathology.Result;
-            Place = pathology.Place;
-            Doctor = pathology.Doctor;
-            Notes = pathology.Notes;
-        }
+    
     }
 }

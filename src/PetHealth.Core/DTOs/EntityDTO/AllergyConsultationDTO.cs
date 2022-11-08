@@ -16,14 +16,6 @@ namespace PetHealth.Core.DTOs.EntityDTO
         public long AllergyId { get; set; }
         public string Notes { get; set; }
 
-        public AllergyConsultationDTO(AllergyConsultation allergyConsultation)
-        {
-            Id = allergyConsultation.Id;
-            PersonId = allergyConsultation.PersonId;
-            PetId = allergyConsultation.PetId;
-            Date = allergyConsultation.Date;
-            AllergyId = allergyConsultation.AllergyId;
-            Notes = allergyConsultation.Notes;
-        }
+  
     }
 }
