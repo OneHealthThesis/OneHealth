@@ -79,6 +79,7 @@ namespace PetHealth.Infrastructure.Persistence.Repositories
                 LastName = dto.LastName?.Trim(),
                 Email = dto.Email,
                 PhoneNumber = dto.PhoneNumber,
+                Version = "0.0.0.1",
                 Id = Guid.NewGuid().ToString(),
             };
 
