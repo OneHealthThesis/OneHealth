@@ -13,9 +13,10 @@ namespace PetHealth.WebUtilities
 {
     public class GlobalExceptionHandlingMiddleware : IMiddleware
     {
-        private readonly ILogger _logger;
-        public GlobalExceptionHandlingMiddleware()
+        private readonly ILogger<GlobalExceptionHandlingMiddleware> _logger;
+        public GlobalExceptionHandlingMiddleware(ILogger<GlobalExceptionHandlingMiddleware> logger)
         {
+            this._logger = logger;
         }
         public async Task InvokeAsync(HttpContext context, RequestDelegate next)
         {
@@ -25,6 +26,7 @@ namespace PetHealth.WebUtilities
             }
             catch (BusinessException e)
             {
+                this._logger.LogError(e.Message);
                 context.Response.StatusCode = (int)HttpStatusCode.NotFound;
 
                 string json = JsonSerializer.Serialize(e.Message);
@@ -34,6 +36,7 @@ namespace PetHealth.WebUtilities
             }
             catch (Exception e)
             {
+                this._logger.LogError(e.Message);
                 context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
                 string error = "Internal Server Error: please contact the support team";
 
