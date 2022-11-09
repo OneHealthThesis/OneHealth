@@ -13,7 +13,7 @@ namespace PetHealth.Core.Mappings
     {
         public RadiologyMappingProfile()
         {
-            CreateMap<PathologyDTO, Pathology>()
+            CreateMap<RadiologyDTO, Radiology>()
                 .ForMember(src => src.Id, opt => opt.MapFrom(opt => opt.Id))
                 .ForMember(src => src.PersonId, opt => opt.MapFrom(opt => opt.PersonId))
                 .ForMember(src => src.PetId, opt => opt.MapFrom(opt => opt.PetId))
