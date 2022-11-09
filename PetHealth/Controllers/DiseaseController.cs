@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PetHealth.Core.DTOs;
 using PetHealth.Core.Entities;
@@ -9,6 +10,7 @@ namespace PetHealth.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class DiseaseController : DataControllerBase<Disease, LongIdNameDTO, long>
     {
         public DiseaseController(IDataService<IPetHealthContext> dataService, ICrudHandler<Disease,LongIdNameDTO,long> dataHandler = null)
