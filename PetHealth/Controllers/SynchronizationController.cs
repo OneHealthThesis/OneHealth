@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PetHealth.Core.DTOs;
 using PetHealth.Core.DTOs.EntityDTO;
+using PetHealth.Core.Entities;
 using PetHealth.Core.Interfaces;
 using PetHealth.Core.Interfaces.CoreInterfaces;
 using PetHealth.Infrastructure.Persistence.Contexts;
@@ -12,9 +13,9 @@ namespace PetHealth.Controllers
     [ApiController]
     public class SynchronizationController : ControllerBase
     {
-        private readonly IPetHealthContext _dataContext;
+        private readonly PetHealthContext _dataContext;
         private readonly ISyncService _syncService;
-       public SynchronizationController(ISyncService service, IPetHealthContext context)
+       public SynchronizationController(ISyncService service, PetHealthContext context)
        {
            _syncService = service;
            _dataContext = context;
@@ -35,10 +36,10 @@ namespace PetHealth.Controllers
         [HttpGet]
         [Route("get")]
         public async Task<IActionResult> SynchroniceGet(
-           )
+            [FromQuery] IdDTO idDto)
         {
-            
-            return Ok(await _syncService.SynchroniceGet(null));
+            ApplicationUser user= _dataContext.Persons.Find(idDto.Id);
+            return Ok(await _syncService.SynchroniceGet(user));
         }
 
         [HttpPost]
