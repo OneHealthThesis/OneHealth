@@ -2,6 +2,7 @@
 using PetHealth.Core.DTOs;
 using PetHealth.Core.DTOs.EntityDTO;
 using PetHealth.Core.Interfaces;
+using PetHealth.Core.Interfaces.CoreInterfaces;
 using PetHealth.Infrastructure.Persistence.Contexts;
 
 namespace PetHealth.Controllers
@@ -9,11 +10,11 @@ namespace PetHealth.Controllers
     [Produces("application/json")]
     [Route("api/sync"), ResponseCache(NoStore = true)]
     [ApiController]
-    public class SynchronizationController : Controller
+    public class SynchronizationController : ControllerBase
     {
-        private readonly PetHealthContext _dataContext;
+        private readonly IPetHealthContext _dataContext;
         private readonly ISyncService _syncService;
-       public SynchronizationController(ISyncService service,PetHealthContext context)
+       public SynchronizationController(ISyncService service, IPetHealthContext context)
        {
            _syncService = service;
            _dataContext = context;

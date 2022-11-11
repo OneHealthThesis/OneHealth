@@ -9,17 +9,21 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 //using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using PetHealth.Core.DTOs;
 using PetHealth.Core.Entities;
 using PetHealth.Core.Exceptions;
 using PetHealth.Core.Interfaces;
+using PetHealth.Core.Interfaces.CoreInterfaces;
 using PetHealth.Core.Utils;
 using PetHealth.Infrastructure.Persistence.Contexts;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Globalization;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
@@ -40,41 +44,31 @@ namespace PetHealth.Infrastructure.Persistence.Repositories
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly UrlEncoder _urlEncoder;
         private readonly IMapper _mapper;
-        private readonly PetHealthContext _context;
+        private readonly IPetHealthContext _context;
+        private readonly IConfiguration _configuration;
+        private ApplicationUser? _user;
 
-        public UserService(
-            
-            UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager,
-            //IOptionsSnapshot<UserLoginSettings> loginSettingsOptions,
-            IHttpContextAccessor httpContextAccessor,
-            UrlEncoder urlEncoder,
-            PetHealthContext context,
-            IMapper mapper)
+        public UserService(UserManager<ApplicationUser> userManager,
+            SignInManager<ApplicationUser> signInManager, IHttpContextAccessor httpContextAccessor,
+            IPetHealthContext context, IMapper mapper, IConfiguration configuration)
         {
             _context = context;
             _mapper = mapper;
             _userManager = userManager;
             _signInManager = signInManager;
-            
             _httpContextAccessor = httpContextAccessor;
-            _urlEncoder = urlEncoder;
+            _configuration = configuration;
         }
 
         private string DomainUrl => $"{_httpContextAccessor.HttpContext.Request.Scheme}://{_httpContextAccessor.HttpContext.Request.Host.Value}";
 
 
-        public async Task Register(UserRegistrationDTO dto, CancellationToken cancellationToken = default)
+        public async Task<IdentityResult> Register(UserRegistrationDTO dto, CancellationToken cancellationToken = default)
         {
-            var existingUser = await _userManager.FindByEmailAsync(dto.Email);
-            var existingPhone = this.FindUserByPhone(dto.PhoneNumber);
-            if (existingUser != null || existingPhone != null)
-                throw new BusinessException($"This email or phone number is already in use.");
-
 
             var user = new ApplicationUser
             {
-                UserName = dto.Email,
+                UserName = dto.PhoneNumber,
                 FirstName = dto.FirstName?.Trim(),
                 LastName = dto.LastName?.Trim(),
                 Email = dto.Email,
@@ -85,79 +79,82 @@ namespace PetHealth.Infrastructure.Persistence.Repositories
 
 
             var result = await _userManager.CreateAsync(user, dto.Password);
-            if (!result.Succeeded)
-                throw new BusinessException(result.Errors.First().Description);
-
-
-            var pet1 = new Pet
+            if (result.Succeeded)
             {
-                Birthday = new DateTime(),
-                BloodType = "type not set",
-                Breed = "not set",
-                Gender = "not set",
-                Name = "not set"
-            };
+                var pet1 = new Pet
+                {
+                    Birthday = new DateTime(),
+                    BloodType = "type not set",
+                    Breed = "not set",
+                    Gender = "not set",
+                    Name = "not set"
+                };
 
-            var pet2 = new Pet
-            {
-                Birthday = new DateTime(),
-                BloodType = "type not set",
-                Breed = "not set",
-                Gender = "not set",
-                Name = "not set"
-            };
+                var pet2 = new Pet
+                {
+                    Birthday = new DateTime(),
+                    BloodType = "type not set",
+                    Breed = "not set",
+                    Gender = "not set",
+                    Name = "not set"
+                };
 
-            var addedPet1 = this._context.Pets.Add(pet1);
-            var addedPet2 = this._context.Pets.Add(pet2);
-            await this._context.SaveChangesAsync(cancellationToken);
+                var addedPet1 = this._context.Pets.Add(pet1);
+                var addedPet2 = this._context.Pets.Add(pet2);
+                await this._context.SaveChangesAsync(cancellationToken);
 
-            this._context.PersonHasPet.Add(new Person_Pet { PersonId = user.Id, PetId = pet1.Id });
-            this._context.PersonHasPet.Add(new Person_Pet { PersonId = user.Id, PetId = pet2.Id });
+                this._context.PersonHasPet.Add(new Person_Pet { PersonId = user.Id, PetId = pet1.Id });
+                this._context.PersonHasPet.Add(new Person_Pet { PersonId = user.Id, PetId = pet2.Id });
 
-            await this._context.SaveChangesAsync(cancellationToken);
+                await this._context.SaveChangesAsync(cancellationToken);
+
+            }
+
+            return result;
 
         }
 
         
         public async Task<AuthResultDTO> Login(LoginDTO dto, CancellationToken cancellationToken = default)
         {
-            var currentIp = _httpContextAccessor.HttpContext.GetUserIp();
 
-            
+            //var user = await _userManager.Users
+            //    .FirstOrDefaultAsync(u => u.Email == dto.Email && u.PhoneNumber == dto.PhoneNumber, cancellationToken);
 
-            var user = await _userManager.Users
-                .FirstOrDefaultAsync(u => u.Email == dto.Email && u.PhoneNumber == dto.PhoneNumber, cancellationToken);
-
-            // Whether user with specified email exist
-            if (user == null)
-            {
-                throw new UserNotExistsException();
-            }
+            //// Whether user with specified email exist
+            //if (user == null)
+            //{
+            //    throw new UserNotExistsException();
+            //}
 
 
-            // Check password
-            if (!await _userManager.CheckPasswordAsync(user, dto.Password))
-            {
-                throw new WrongCredentialsException("Incorrect user name or password.");
-            }
+            //// Check password
+            //if (!await _userManager.CheckPasswordAsync(user, dto.Password))
+            //{
+            //    throw new WrongCredentialsException("Incorrect user name or password.");
+            //}
 
-            //We use SignInAsync instead of PasswordSignInAsync because SignInAsync contains custom logging logic
-            await _signInManager.SignInAsync(user, new AuthenticationProperties(), "Password");
+            ////We use SignInAsync instead of PasswordSignInAsync because SignInAsync contains custom logging logic
+            //await _signInManager.SignInAsync(user, new AuthenticationProperties(), "Password");
 
-            var loggedUser = _mapper.Map<UserDTO>(
-                await _context.Users.FindAsync(user.Id));
+            var loggedUser = _mapper.Map<UserDTO>(_user);
+                //await _context.Persons.FindAsync(_user.Id));
 
             var petsIds = this._context.PersonHasPet
                 .Where(entity => entity.PersonId == loggedUser.Id)
                 .Select(entity => entity.PetId)
                 .ToList();
 
-            return new AuthResultDTO { UserId = user.Id, LoggedUser = loggedUser, PetsIds = petsIds };
+            return new AuthResultDTO { UserId = _user.Id, LoggedUser = loggedUser, PetsIds = petsIds };
         }
 
-        
 
-        public async Task Logout() => await _signInManager.SignOutAsync();
+
+        public async Task Logout()
+        {
+            await _signInManager.SignOutAsync();
+
+        }
 
 
         public static class ErrorMessages
@@ -182,7 +179,67 @@ namespace PetHealth.Infrastructure.Persistence.Repositories
         }
 
 
-        private ApplicationUser FindUserByPhone(string phoneNumber)
-            => this._context.Users.FirstOrDefault(user => user.PhoneNumber == phoneNumber);        
+        public async Task<bool> ValidateUserAsync(LoginDTO loginDto)
+        {
+            _user = await _userManager.FindByNameAsync(loginDto.PhoneNumber);
+            var result = _user != null && await _userManager.CheckPasswordAsync(_user, loginDto.Password);
+            return result;
+
+        }
+
+        public async Task<string> CreateLogoutTokenAsync()
+        {
+            var signingCredentials = GetSigningCredentials();
+            var claims = await GetClaims();
+            var tokenOptions = GenerateTokenOptions(signingCredentials, claims, "expired");
+            return new JwtSecurityTokenHandler().WriteToken(tokenOptions);
+        }
+
+        public async Task<string> CreateTokenAsync()
+        {
+            var signingCredentials = GetSigningCredentials();
+            var claims = await GetClaims();
+            var tokenOptions = GenerateTokenOptions(signingCredentials, claims, "expiresIn");
+            return new JwtSecurityTokenHandler().WriteToken(tokenOptions);
+        }
+
+
+        private SigningCredentials GetSigningCredentials()
+        {
+            var jwtConfig = _configuration.GetSection("jwtConfig");
+            var key = Encoding.UTF8.GetBytes(jwtConfig["Secret"]);
+            var secret = new SymmetricSecurityKey(key);
+            return new SigningCredentials(secret, SecurityAlgorithms.HmacSha256);
+        }
+
+
+        private async Task<List<Claim>> GetClaims()
+        {
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Name, _user.UserName)
+            };
+            var roles = await _userManager.GetRolesAsync(_user);
+            foreach (var role in roles)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, role));
+            }
+            return claims;
+        }
+
+        private JwtSecurityToken GenerateTokenOptions(SigningCredentials signingCredentials, List<Claim> claims, string loginOption)
+        {
+            var jwtSettings = _configuration.GetSection("JwtConfig");
+            var tokenOptions = new JwtSecurityToken
+            (
+            issuer: jwtSettings["validIssuer"],
+            audience: jwtSettings["validAudience"],
+            claims: claims,
+            expires: DateTime.Now.AddMinutes(Convert.ToDouble(jwtSettings[loginOption])),
+            signingCredentials: signingCredentials
+            );
+            return tokenOptions;
+        }
+
     }
 }
