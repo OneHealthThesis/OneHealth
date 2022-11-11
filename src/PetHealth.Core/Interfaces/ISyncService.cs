@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using PetHealth.Core.DTOs;
+using PetHealth.Core.DTOs.EntityDTO;
 using PetHealth.Core.Entities;
 
 namespace PetHealth.Core.Interfaces
@@ -12,5 +13,7 @@ namespace PetHealth.Core.Interfaces
     {
        Task SynchroniceSet(SynchroDataDTO synchroData);
        Task<SynchroDataDTO> SynchroniceGet(ApplicationUser applicationUser);
+
+       Task UpdatePet(PetDTO pet);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PetHealth.Core.DTOs;
+using PetHealth.Core.DTOs.EntityDTO;
 using PetHealth.Core.Interfaces;
 using PetHealth.Infrastructure.Persistence.Contexts;
 
@@ -30,13 +31,23 @@ namespace PetHealth.Controllers
             return Ok();
         }
 
-        [HttpPost]
+        [HttpGet]
         [Route("get")]
         public async Task<IActionResult> SynchroniceGet(
            )
         {
             
             return Ok(await _syncService.SynchroniceGet(null));
+        }
+
+        [HttpPost]
+        [Route("update/pet")]
+        public async Task<IActionResult> UpdatePet(
+            [FromBody]PetDTO petDto
+        )
+        {
+            await _syncService.UpdatePet(petDto);
+            return Ok();
         }
     }
 }

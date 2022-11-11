@@ -164,5 +164,20 @@ namespace PetHealth.Infrastructure.Persistence.Repositories
 
             return synchroDataDTO;
         }
+
+        public Task UpdatePet(PetDTO pet)
+        {
+            Pet toUpdate = _context.Pets.Find(pet.Id);
+            if (toUpdate != null)
+            {
+                toUpdate.Birthday = pet.Birthday;
+                toUpdate.Gender = pet.Gender;
+                toUpdate.Name = pet.Name;
+                toUpdate.BloodType = pet.BloodType;
+                toUpdate.Breed = pet.Breed;
+                _context.SaveChanges();
+            }
+            return Task.CompletedTask;
+        }
     }
 }
