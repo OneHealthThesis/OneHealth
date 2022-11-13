@@ -51,5 +51,16 @@ namespace PetHealth.Controllers
             await _syncService.UpdatePet(petDto);
             return Ok();
         }
+
+        [HttpPut]
+        [Route("set/incharge")]
+        public async Task<IActionResult> SetIncharge(
+            [FromQuery] string personId,
+            [FromQuery] long petId
+                )
+        {
+            await _syncService.SetInCharge(personId, petId);
+            return Ok();
+        }
     }
 }

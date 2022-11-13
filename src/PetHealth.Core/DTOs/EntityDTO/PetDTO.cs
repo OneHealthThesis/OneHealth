@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using PetHealth.Core.Entities;
+using PetHealth.Core.Interfaces.CoreInterfaces;
 
 namespace PetHealth.Core.DTOs.EntityDTO
 {
-    public class PetDTO
+    public class PetDTO: IDTO<long>
     {
         public long Id { get; set; }
 

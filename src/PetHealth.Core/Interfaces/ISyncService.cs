@@ -15,5 +15,6 @@ namespace PetHealth.Core.Interfaces
        Task<SynchroDataDTO> SynchroniceGet(ApplicationUser applicationUser);
 
        Task UpdatePet(PetDTO pet);
+       Task SetInCharge(string userId, long petId);
     }
 }
