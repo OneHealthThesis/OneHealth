@@ -51,5 +51,5 @@ app.UseAuthorization();
 
 app.UseMiddleware<GlobalExceptionHandlingMiddleware>();
 app.MapControllers();
-
+SeedData.Seed(app);
 app.Run();
