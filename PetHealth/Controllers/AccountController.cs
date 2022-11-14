@@ -23,7 +23,7 @@ namespace PetHealth.Controllers
     {
         ILogger<AccountApiController> _logger;
         private readonly IUserService _userService;
-        private readonly PetHealthContext _dataContext;
+        private readonly IPetHealthContext _dataContext;
 
         private const string Scheme = "https"; // hardcoded because Request.Scheme not reliable with load balanced architecture especially with Azure
 
@@ -31,7 +31,7 @@ namespace PetHealth.Controllers
         public AccountApiController(
             IUserService userService,
             ILogger<AccountApiController> logger,
-            PetHealthContext dataContext)
+            IPetHealthContext dataContext)
         {
             _logger = logger;
             _userService = userService;

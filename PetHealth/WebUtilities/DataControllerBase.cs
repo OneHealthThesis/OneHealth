@@ -212,6 +212,7 @@ namespace PetHealth.WebUtilities
         [HttpGet]
         public virtual async Task<IActionResult> Get(CancellationToken ct = default)
         {
+            var a = this.ControllerContext.HttpContext.User.Identity.Name;
             if (DataHandler is IEntityGetAll<TDTO,TKey> methodHandler)
                 return Ok(await methodHandler.GetAll(ct));
 

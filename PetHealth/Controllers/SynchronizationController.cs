@@ -19,48 +19,52 @@ namespace PetHealth.Controllers
        {
            _syncService = service;
            _dataContext = context;
+
        }
 
 
         [HttpPost]
         [Route("set")]
         public async Task<IActionResult> SynchroniceSet([
-            FromBody]SynchroDataDTO synchroDataDTO
+            FromBody]SynchroDataDTO synchroDataDTO,
+            CancellationToken cancellationToken = default
             )
 
         {
-            await _syncService.SynchroniceSet(synchroDataDTO);
+            await _syncService.SynchroniceSet(synchroDataDTO, cancellationToken);
             return Ok();
         }
 
         [HttpGet]
         [Route("get")]
-        public async Task<IActionResult> SynchroniceGet(
-            [FromQuery] IdDTO idDto)
+        public async Task<IActionResult> SynchroniceGet(CancellationToken cancellationToken=default)
         {
-            ApplicationUser user= _dataContext.Persons.Find(idDto.Id);
-            return Ok(await _syncService.SynchroniceGet(user));
+            var userName = this.HttpContext.User.Identity.Name;
+            return Ok(await _syncService.SynchroniceGet(userName, cancellationToken));
         }
 
         [HttpPost]
         [Route("update/pet")]
         public async Task<IActionResult> UpdatePet(
-            [FromBody]PetDTO petDto
+            [FromBody]PetDTO petDto,
+            CancellationToken cancellationToken = default
         )
         {
-            await _syncService.UpdatePet(petDto);
-            return Ok();
+            
+            return await _syncService.UpdatePet(petDto, cancellationToken)? Ok(): StatusCode(404, "Pet not found.");
         }
 
         [HttpPut]
         [Route("set/incharge")]
         public async Task<IActionResult> SetIncharge(
-            [FromQuery] string personId,
-            [FromQuery] long petId
+            [FromQuery] string inChargeId,
+            [FromQuery] long petId,
+            CancellationToken cancellationToken = default
                 )
         {
-            await _syncService.SetInCharge(personId, petId);
-            return Ok();
+            var userName = this.HttpContext.User.Identity.Name;
+            
+            return (await _syncService.SetInCharge(userName, inChargeId, petId, cancellationToken))? Ok(): BadRequest();
         }
     }
 }

@@ -4,26 +4,31 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using PetHealth.Core.DTOs;
 using PetHealth.Core.DTOs.EntityDTO;
 using PetHealth.Core.Entities;
 using PetHealth.Core.Interfaces;
+using PetHealth.Core.Interfaces.CoreInterfaces;
 using PetHealth.Infrastructure.Persistence.Contexts;
 
 namespace PetHealth.Infrastructure.Persistence.Repositories
 {
     public class SyncService:ISyncService
     {
-        private readonly PetHealthContext _context;
+        private readonly IPetHealthContext _context;
         private readonly IMapper _mapper;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public SyncService(PetHealthContext contex, IMapper mapper)
+        public SyncService(IPetHealthContext contex, IMapper mapper, UserManager<ApplicationUser> userManager)
         {
             _context = contex;
             _mapper = mapper;
+            _userManager = userManager;
         }
 
-        public async Task SynchroniceSet(SynchroDataDTO synchroData)
+        public async Task SynchroniceSet(SynchroDataDTO synchroData, CancellationToken cancellationToken)
         {
             foreach (var entity in synchroData.Allergies)
             {
@@ -109,14 +114,17 @@ namespace PetHealth.Infrastructure.Persistence.Repositories
                 _context.VaccineConsultations.Add(temp);
             }
 
-          _context.SaveChanges();
+          await _context.SaveChangesAsync(cancellationToken);
         }
 
-        public async Task<SynchroDataDTO> SynchroniceGet(ApplicationUser user
-            )
+        public async Task<SynchroDataDTO> SynchroniceGet(string userName, CancellationToken cancellationToken)
         {
+            var user = await this._userManager.FindByNameAsync(userName);
+
             DateTime? dateUpdate = user.LastSynchronized != null ? user.LastSynchronized  :DateTime.MinValue;
-            var pets = _context.PersonHasPet.Where(data => data.PersonId == user.Id).Select(p => p.PetId).ToList();
+            var pets = _context.PersonHasPet
+                .AsNoTracking()
+                .Where(data => data.PersonId == user.Id).Select(p => p.PetId).ToList();
             SynchroDataDTO synchroDataDTO = new SynchroDataDTO();
 
             foreach (var item in _context.Allergies.Where(data => data.CreatedOnDBDate > dateUpdate))
@@ -161,11 +169,11 @@ namespace PetHealth.Infrastructure.Persistence.Repositories
             foreach (var item in _context.VaccineConsultations.Where(data => data.PersonId != user.Id && pets.Contains(data.PetId) && data.CreatedOnDBDate > dateUpdate))
                 synchroDataDTO.VaccineConsultation.Add(this._mapper.Map<VaccineConsultationDTO>(item));
             user.LastSynchronized = DateTime.Now;
-            _context.SaveChanges();
+            await _context.SaveChangesAsync(cancellationToken);
             return synchroDataDTO;
         }
 
-        public Task UpdatePet(PetDTO pet)
+        public async Task<bool> UpdatePet(PetDTO pet, CancellationToken cancellationToken)
         {
             Pet toUpdate = _context.Pets.Find(pet.Id);
             if (toUpdate != null)
@@ -175,9 +183,17 @@ namespace PetHealth.Infrastructure.Persistence.Repositories
                 toUpdate.Name = pet.Name;
                 toUpdate.BloodType = pet.BloodType;
                 toUpdate.Breed = pet.Breed;
-                _context.SaveChanges();
+                await _context.SaveChangesAsync(cancellationToken);
+                return true;
             }
-            return Task.CompletedTask;
+
+            return false;
+        }
+
+
+        public Task<bool> SetInCharge(string userName, string inChargeId, long petId, CancellationToken cancellationToken)
+        {
+            return null;
         }
     }
 }
