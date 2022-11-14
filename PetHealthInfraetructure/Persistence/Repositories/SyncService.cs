@@ -194,7 +194,8 @@ namespace PetHealth.Infrastructure.Persistence.Repositories
         public async Task<bool> SetInCharge(string userName, string ownerId, long petId, CancellationToken cancellationToken)
         {
             var user = await this._userManager.FindByNameAsync(userName);
-            var check = _context.PersonHasPet.Any(x => x.PersonId == ownerId && x.PetId == petId && x.Owner == true);
+            var check = _context.PersonHasPet.Any(x => x.PersonId == ownerId && x.PetId == petId && x.Owner == true) &&
+                        !_context.PersonHasPet.Any(x => x.PersonId == user.Id && x.PetId == petId );
             if (check)
             {
                 _context.PersonHasPet.Add(new(){PersonId = user.Id,PetId = petId,Owner = false});
