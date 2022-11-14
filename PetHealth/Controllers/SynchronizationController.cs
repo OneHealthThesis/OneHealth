@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PetHealth.Core.DTOs;
 using PetHealth.Core.DTOs.EntityDTO;
 using PetHealth.Core.Entities;
@@ -11,6 +12,7 @@ namespace PetHealth.Controllers
     [Produces("application/json")]
     [Route("api/sync"), ResponseCache(NoStore = true)]
     [ApiController]
+    [Authorize]
     public class SynchronizationController : ControllerBase
     {
         private readonly PetHealthContext _dataContext;
