@@ -18,7 +18,6 @@ namespace PetHealth.Controllers
     [Produces("application/json")]
     [Route("api/account"), ResponseCache(NoStore = true)]
     [ApiController]
-    [Authorize]
     public class AccountApiController : ControllerBase
     {
         ILogger<AccountApiController> _logger;
