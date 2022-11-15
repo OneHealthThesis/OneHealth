@@ -205,5 +205,19 @@ namespace PetHealth.Infrastructure.Persistence.Repositories
             }
             return false;
         }
+
+        public async Task<bool> DeleteInCharge(string? userName, long petId, CancellationToken cancellationToken)
+        {
+            var user = await this._userManager.FindByNameAsync(userName);
+            var check = _context.PersonHasPet.Any(x => x.PersonId == user.Id && x.PetId == petId && x.Owner == false);
+            if (check)
+            {
+                _context.PersonHasPet.Remove(new() { PersonId = user.Id, PetId = petId, Owner = false });
+                await _context.SaveChangesAsync(cancellationToken);
+                return true;
+            }
+
+            return false;
+        }
     }
 }

@@ -58,7 +58,7 @@ namespace PetHealth.Controllers
 
         [HttpPut]
         [Route("set/incharge")]
-        public async Task<IActionResult> SetIncharge(
+        public async Task<IActionResult> SetInCharge(
             [FromQuery] string ownerId,
             [FromQuery] long petId,
             CancellationToken cancellationToken = default
@@ -67,6 +67,17 @@ namespace PetHealth.Controllers
             var userName = this.HttpContext.User.Identity.Name;
             
             return (await _syncService.SetInCharge(userName, ownerId, petId, cancellationToken))? Ok(): StatusCode(400,"Invalid Owner");
+        }
+
+        [HttpDelete]
+        [Route("delete/incharge")]
+        public async Task<IActionResult> DeleteInCharge(
+            [FromQuery] long petId,
+            CancellationToken cancellationToken = default
+        )
+        {
+            var userName = this.HttpContext.User.Identity.Name;
+            return (await _syncService.DeleteInCharge(userName, petId, cancellationToken)) ? Ok() : StatusCode(400, "This person has not the set pet");
         }
     }
 }

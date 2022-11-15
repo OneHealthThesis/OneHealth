@@ -16,5 +16,6 @@ namespace PetHealth.Core.Interfaces
 
        Task<bool> UpdatePet(PetDTO pet, CancellationToken cancellationToken);
        Task<bool> SetInCharge(string userName, string ownerId, long petId, CancellationToken cancellationToken);
+       Task<bool> DeleteInCharge(string? userName, long petId, CancellationToken cancellationToken);
     }
 }
