@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
@@ -127,16 +128,16 @@ namespace PetHealth.Infrastructure.Persistence.Repositories
                 .Where(data => data.PersonId == user.Id).Select(p => p.PetId).ToList();
             SynchroDataDTO synchroDataDTO = new SynchroDataDTO();
 
-            if(!_context.Allergies.Any())
+            if(_context.Allergies.Any())
                 foreach (var item in _context.Allergies.Where(data => data.CreatedOnDBDate > dateUpdate))
                     synchroDataDTO.Allergies.Add(this._mapper.Map<LongIdNameDTO>(item));
-            if (!_context.Drugs.Any())
+            if (_context.Drugs.Any())
                 foreach (var item in _context.Drugs.Where(data => data.CreatedOnDBDate > dateUpdate))
                     synchroDataDTO.Drug.Add(this._mapper.Map<LongIdNameDTO>(item));
-            if (!_context.Diseases.Any())
+            if (_context.Diseases.Any())
                 foreach (var item in _context.Diseases.Where(data => data.CreatedOnDBDate > dateUpdate))
                     synchroDataDTO.Disease.Add(this._mapper.Map<LongIdNameDTO>(item));
-            if (!_context.Vaccines.Any())
+            if (_context.Vaccines.Any())
                 foreach (var item in _context.Vaccines.Where(data => data.CreatedOnDBDate > dateUpdate))
                     synchroDataDTO.Vaccines.Add(this._mapper.Map<LongIdNameDTO>(item));
 
@@ -221,6 +222,27 @@ namespace PetHealth.Infrastructure.Persistence.Repositories
             }
 
             return false;
+        }
+
+        public SynchroDataDTO GetStaticData()
+        {
+            SynchroDataDTO synchroDataDTO = new SynchroDataDTO();
+
+            if (_context.Allergies.Any())
+                foreach (var item in _context.Allergies.AsNoTracking())
+                    synchroDataDTO.Allergies.Add(this._mapper.Map<LongIdNameDTO>(item));
+            if (_context.Drugs.Any())
+                foreach (var item in _context.Drugs.AsNoTracking())
+                    synchroDataDTO.Drug.Add(this._mapper.Map<LongIdNameDTO>(item));
+            if (_context.Diseases.Any())
+                foreach (var item in _context.Diseases.AsNoTracking())
+                    synchroDataDTO.Disease.Add(this._mapper.Map<LongIdNameDTO>(item));
+            if (_context.Vaccines.Any())
+                foreach (var item in _context.Vaccines.AsNoTracking())
+                    synchroDataDTO.Vaccines.Add(this._mapper.Map<LongIdNameDTO>(item));
+
+
+            return synchroDataDTO;
         }
     }
 }

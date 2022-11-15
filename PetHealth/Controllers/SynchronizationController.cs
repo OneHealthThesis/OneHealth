@@ -79,5 +79,12 @@ namespace PetHealth.Controllers
             var userName = this.HttpContext.User.Identity.Name;
             return (await _syncService.DeleteInCharge(userName, petId, cancellationToken)) ? Ok() : StatusCode(400, "This person has not the set pet");
         }
+
+        [HttpGet]
+        [Route("getStaticData")]
+        public IActionResult GetStatiData()
+        {
+            return Ok(this._syncService.GetStaticData());
+        }
     }
 }
