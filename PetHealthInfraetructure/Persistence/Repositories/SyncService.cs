@@ -185,6 +185,7 @@ namespace PetHealth.Infrastructure.Persistence.Repositories
                 toUpdate.Name = pet.Name;
                 toUpdate.BloodType = pet.BloodType;
                 toUpdate.Breed = pet.Breed;
+                this._context.Pets.Update(toUpdate);
                 await _context.SaveChangesAsync(cancellationToken);
                 return true;
             }
