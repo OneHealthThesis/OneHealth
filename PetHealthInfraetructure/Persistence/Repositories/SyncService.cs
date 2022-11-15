@@ -28,7 +28,7 @@ namespace PetHealth.Infrastructure.Persistence.Repositories
             _userManager = userManager;
         }
 
-        public async Task SynchroniceSet(SynchroDataDTO synchroData, CancellationToken cancellationToken)
+        public async Task SynchronizeSet(SynchroDataDTO synchroData, CancellationToken cancellationToken)
         {
             foreach (var entity in synchroData.Allergies)
             {
@@ -117,7 +117,7 @@ namespace PetHealth.Infrastructure.Persistence.Repositories
           await _context.SaveChangesAsync(cancellationToken);
         }
 
-        public async Task<SynchroDataDTO> SynchroniceGet(string userName, CancellationToken cancellationToken)
+        public async Task<SynchroDataDTO> SynchronizeGet(string userName, CancellationToken cancellationToken)
         {
             var user = await this._userManager.FindByNameAsync(userName);
 
@@ -197,6 +197,7 @@ namespace PetHealth.Infrastructure.Persistence.Repositories
             var user = await this._userManager.FindByNameAsync(userName);
             var check = _context.PersonHasPet.Any(x => x.PersonId == ownerId && x.PetId == petId && x.Owner == true) &&
                         !_context.PersonHasPet.Any(x => x.PersonId == user.Id && x.PetId == petId );
+
             if (check)
             {
                 _context.PersonHasPet.Add(new(){PersonId = user.Id,PetId = petId,Owner = false});

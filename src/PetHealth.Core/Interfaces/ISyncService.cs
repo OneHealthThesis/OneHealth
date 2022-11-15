@@ -11,8 +11,8 @@ namespace PetHealth.Core.Interfaces
 {
     public interface ISyncService
     {
-       Task SynchroniceSet(SynchroDataDTO synchroData, CancellationToken cancellationToken);
-       Task<SynchroDataDTO> SynchroniceGet(string userName, CancellationToken cancellationToken);
+       Task SynchronizeSet(SynchroDataDTO synchroData, CancellationToken cancellationToken);
+       Task<SynchroDataDTO> SynchronizeGet(string userName, CancellationToken cancellationToken);
 
        Task<bool> UpdatePet(PetDTO pet, CancellationToken cancellationToken);
        Task<bool> SetInCharge(string userName, string ownerId, long petId, CancellationToken cancellationToken);

@@ -33,7 +33,7 @@ namespace PetHealth.Controllers
             )
 
         {
-            await _syncService.SynchroniceSet(synchroDataDTO, cancellationToken);
+            await _syncService.SynchronizeSet(synchroDataDTO, cancellationToken);
             return Ok();
         }
 
@@ -42,7 +42,7 @@ namespace PetHealth.Controllers
         public async Task<IActionResult> SynchroniceGet(CancellationToken cancellationToken=default)
         {
             var userName = this.HttpContext.User.Identity.Name;
-            return Ok(await _syncService.SynchroniceGet(userName, cancellationToken));
+            return Ok(await _syncService.SynchronizeGet(userName, cancellationToken));
         }
 
         [HttpPost]
