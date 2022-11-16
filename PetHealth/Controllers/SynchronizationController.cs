@@ -52,8 +52,8 @@ namespace PetHealth.Controllers
             CancellationToken cancellationToken = default
         )
         {
-            
-            return await _syncService.UpdatePet(petDto, cancellationToken)? Ok(): StatusCode(404, "Pet not found.");
+            var userName = this.HttpContext.User.Identity.Name;
+            return await _syncService.UpdatePet(userName, petDto, cancellationToken)? Ok(): StatusCode(404, "Pet not found.");
         }
 
         [HttpPut]

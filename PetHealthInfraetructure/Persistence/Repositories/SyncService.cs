@@ -176,32 +176,41 @@ namespace PetHealth.Infrastructure.Persistence.Repositories
             return synchroDataDTO;
         }
 
-        public async Task<bool> UpdatePet(PetDTO pet, CancellationToken cancellationToken)
+        public async Task<bool> UpdatePet(string userName, PetDTO pet, CancellationToken cancellationToken)
         {
             Pet toUpdate = this._mapper.Map<Pet>(pet);
-            if (toUpdate != null)
+            var user = await this._userManager.FindByNameAsync(userName);
+            if (_context.PersonHasPet.Any(x => x.PetId == toUpdate.Id && x.PersonId == user.Id))
             {
-                this._context.Pets.Update(toUpdate);
-                await _context.SaveChangesAsync(cancellationToken);
-                return true;
+                try
+                {
+                    this._context.Pets.Update(toUpdate);
+                    await _context.SaveChangesAsync(cancellationToken);
+                    return true;
+                }
+                catch (Exception e)
+                {
+                    return false;
+                }
             }
-
             return false;
         }
 
 
-        public async Task<bool> SetInCharge(string userName, string ownerId, long petId, CancellationToken cancellationToken)
+        public async Task<bool> SetInCharge(string userName, string ownerId, long petId,
+            CancellationToken cancellationToken)
         {
             var user = await this._userManager.FindByNameAsync(userName);
             var check = _context.PersonHasPet.Any(x => x.PersonId == ownerId && x.PetId == petId && x.Owner == true) &&
-                        !_context.PersonHasPet.Any(x => x.PersonId == user.Id && x.PetId == petId );
+                        !_context.PersonHasPet.Any(x => x.PersonId == user.Id && x.PetId == petId);
 
             if (check)
             {
-                _context.PersonHasPet.Add(new(){PersonId = user.Id,PetId = petId,Owner = false});
+                _context.PersonHasPet.Add(new() { PersonId = user.Id, PetId = petId, Owner = false });
                 await _context.SaveChangesAsync(cancellationToken);
                 return true;
             }
+
             return false;
         }
 

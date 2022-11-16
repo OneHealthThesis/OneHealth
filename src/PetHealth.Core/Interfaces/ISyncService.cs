@@ -14,7 +14,7 @@ namespace PetHealth.Core.Interfaces
         Task SynchronizeSet(SynchroDataDTO synchroData, CancellationToken cancellationToken);
         Task<SynchroDataDTO> SynchronizeGet(string userName, CancellationToken cancellationToken);
 
-        Task<bool> UpdatePet(PetDTO pet, CancellationToken cancellationToken);
+        Task<bool> UpdatePet(string userName,PetDTO pet, CancellationToken cancellationToken);
         Task<bool> SetInCharge(string userName, string ownerId, long petId, CancellationToken cancellationToken);
         Task<bool> DeleteInCharge(string? userName, long petId, CancellationToken cancellationToken);
 
