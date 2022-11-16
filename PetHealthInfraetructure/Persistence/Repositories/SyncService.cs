@@ -177,14 +177,9 @@ namespace PetHealth.Infrastructure.Persistence.Repositories
 
         public async Task<bool> UpdatePet(PetDTO pet, CancellationToken cancellationToken)
         {
-            Pet toUpdate = _context.Pets.Find(pet.Id);
+            Pet toUpdate = this._mapper.Map<Pet>(pet);
             if (toUpdate != null)
             {
-                toUpdate.Birthday = pet.Birthday;
-                toUpdate.Gender = pet.Gender;
-                toUpdate.Name = pet.Name;
-                toUpdate.BloodType = pet.BloodType;
-                toUpdate.Breed = pet.Breed;
                 this._context.Pets.Update(toUpdate);
                 await _context.SaveChangesAsync(cancellationToken);
                 return true;

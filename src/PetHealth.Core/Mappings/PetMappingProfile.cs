@@ -21,6 +21,8 @@ namespace PetHealth.Core.Mappings
                 .ForMember(src => src.BloodType, opt => opt.MapFrom(dto => dto.BloodType))
                 .ForMember(src => src.Breed, opt => opt.MapFrom(dto => dto.Breed))
                 .ForMember(src => src.Gender, opt => opt.MapFrom(dto => dto.Gender))
+                .ForMember(src => src.Species, opt => opt.MapFrom(dto => dto.Species))
+
                 .ReverseMap();
         }
     }

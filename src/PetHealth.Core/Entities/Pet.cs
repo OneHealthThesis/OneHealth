@@ -19,6 +19,8 @@ namespace PetHealth.Core.Entities
 
         public string Breed { get; set; }
 
+        public string Species { get; set; }
+
         public string Gender { get; set; }
 
         public string BloodType { get; set; }
