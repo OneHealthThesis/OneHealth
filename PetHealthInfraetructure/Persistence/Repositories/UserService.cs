@@ -87,7 +87,8 @@ namespace PetHealth.Infrastructure.Persistence.Repositories
                     BloodType = "type not set",
                     Breed = "not set",
                     Gender = "not set",
-                    Name = "not set"
+                    Name = "not set",
+                    Species = "not set"
                 };
 
                 var pet2 = new Pet
@@ -96,7 +97,8 @@ namespace PetHealth.Infrastructure.Persistence.Repositories
                     BloodType = "type not set",
                     Breed = "not set",
                     Gender = "not set",
-                    Name = "not set"
+                    Name = "not set",
+                    Species = "not set"
                 };
 
                 var addedPet1 = this._context.Pets.Add(pet1);
