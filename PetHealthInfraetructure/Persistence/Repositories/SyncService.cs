@@ -170,7 +170,7 @@ namespace PetHealth.Infrastructure.Persistence.Repositories
 
             foreach (var item in _context.VaccineConsultations.Where(data => data.PersonId != user.Id && pets.Contains(data.PetId) && data.CreatedOnDBDate > dateUpdate))
                 synchroDataDTO.VaccineConsultation.Add(this._mapper.Map<VaccineConsultationDTO>(item));
-            user.LastSynchronized = DateTime.Now;
+            user.LastSynchronized = DateTime.UtcNow;
             this._context.Persons.Update(user);
             await _context.SaveChangesAsync(cancellationToken);
             return synchroDataDTO;
