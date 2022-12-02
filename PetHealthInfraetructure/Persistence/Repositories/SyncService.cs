@@ -121,7 +121,7 @@ namespace PetHealth.Infrastructure.Persistence.Repositories
         public async Task<SynchroDataDTO> SynchronizeGet(string userName, CancellationToken cancellationToken)
         {
             var user = await this._userManager.FindByNameAsync(userName);
-            var graterDate = DateTime.MinValue;
+
             DateTime? dateUpdate = user.LastSynchronized != null ? user.LastSynchronized  :DateTime.MinValue;
             var pets = _context.PersonHasPet
                 .AsNoTracking()
@@ -141,72 +141,38 @@ namespace PetHealth.Infrastructure.Persistence.Repositories
             //    foreach (var item in _context.Vaccines.Where(data => data.CreatedOnDBDate > dateUpdate))
             //        synchroDataDTO.Vaccines.Add(this._mapper.Map<LongIdNameDTO>(item));
 
-            foreach (var item in _context.AllergyConsultations.Where(data => data.PersonId != user.Id && pets.Contains(data.PetId) && data.CreatedOnDBDate > dateUpdate))
-            {
-                graterDate = graterDate < item.Date ? item.Date : graterDate;
+            foreach (var item in _context.AllergyConsultations.Where(data =>data.PersonId !=user.Id && pets.Contains(data.PetId) &&  data.CreatedOnDBDate > dateUpdate))
                 synchroDataDTO.AllergyConsultation.Add(this._mapper.Map<AllergyConsultationDTO>(item));
-            }
 
             foreach (var item in _context.Condition.Where(data => data.PersonId != user.Id && pets.Contains(data.PetId) && data.CreatedOnDBDate > dateUpdate))
-            {
-                graterDate = graterDate < item.Date ? item.Date : graterDate;
                 synchroDataDTO.Condition.Add(this._mapper.Map<ConditionDTO>(item));
-            }
 
             foreach (var item in _context.LabTests.Where(data => data.PersonId != user.Id && pets.Contains(data.PetId) && data.CreatedOnDBDate > dateUpdate))
-            {
-                graterDate = graterDate < item.Date ? item.Date : graterDate;
                 synchroDataDTO.LabTest.Add(this._mapper.Map<LabTestDTO>(item));
-            }
 
             foreach (var item in _context.MedicalVisits.Where(data => data.PersonId != user.Id && pets.Contains(data.PetId) && data.CreatedOnDBDate > dateUpdate))
-            {
-                graterDate = graterDate < item.Date ? item.Date : graterDate;
                 synchroDataDTO.MedicalVisit.Add(this._mapper.Map<MedicalVisitDTO>(item));
-            }
 
             foreach (var item in _context.Notes.Where(data => data.PersonId != user.Id && pets.Contains(data.PetId) && data.CreatedOnDBDate > dateUpdate))
-            {
-                graterDate = graterDate < item.Date ? item.Date : graterDate;
                 synchroDataDTO.Note.Add(this._mapper.Map<NoteDTO>(item));
-            }
 
             foreach (var item in _context.Pathologies.Where(data => data.PersonId != user.Id && pets.Contains(data.PetId) && data.CreatedOnDBDate > dateUpdate))
-            {
-                graterDate = graterDate < item.Date ? item.Date : graterDate;
                 synchroDataDTO.Pathology.Add(this._mapper.Map<PathologyDTO>(item));
-            }
 
             foreach (var item in _context.PrescriptionDrug.Where(data => data.PersonId != user.Id && pets.Contains(data.PetId) && data.CreatedOnDBDate > dateUpdate))
-            {
-                graterDate = graterDate < item.Date ? item.Date : graterDate;
                 synchroDataDTO.PrescriptionDrug.Add(this._mapper.Map<PrescriptionDrugDTO>(item));
-            }
 
             foreach (var item in _context.Radiologies.Where(data => data.PersonId != user.Id && pets.Contains(data.PetId) && data.CreatedOnDBDate > dateUpdate))
-            {
-                graterDate = graterDate < item.Date ? item.Date : graterDate;
                 synchroDataDTO.Radiology.Add(this._mapper.Map<RadiologyDTO>(item));
-            }
 
             foreach (var item in _context.Surgeries.Where(data => data.PersonId != user.Id && pets.Contains(data.PetId) && data.CreatedOnDBDate > dateUpdate))
-            {
-                graterDate = graterDate < item.Date ? item.Date : graterDate;
                 synchroDataDTO.Surgeries.Add(this._mapper.Map<SurgeriesDTO>(item));
-            }
 
             foreach (var item in _context.VaccineConsultations.Where(data => data.PersonId != user.Id && pets.Contains(data.PetId) && data.CreatedOnDBDate > dateUpdate))
-            {
-                graterDate = graterDate < item.Date ? item.Date : graterDate;
                 synchroDataDTO.VaccineConsultation.Add(this._mapper.Map<VaccineConsultationDTO>(item));
-            }
-            if (graterDate > DateTime.MinValue)
-            {
-                user.LastSynchronized = graterDate;
-                this._context.Persons.Update(user);
-                await _context.SaveChangesAsync(cancellationToken);
-            }
-            
+            user.LastSynchronized = DateTime.UtcNow;
+            this._context.Persons.Update(user);
+            await _context.SaveChangesAsync(cancellationToken);
             return synchroDataDTO;
         }
 

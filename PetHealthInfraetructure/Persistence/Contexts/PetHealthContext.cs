@@ -28,91 +28,91 @@ namespace PetHealth.Infrastructure.Persistence.Contexts
             modelBuilder.Entity<Allergies>(entity =>
             {
                 entity.Property(entry => entry.CreatedOnDBDate)
-                .HasDefaultValueSql("getdate()");
+                .HasDefaultValueSql("GETUTCDATE()");
             });
 
             modelBuilder.Entity<AllergyConsultation>(entity =>
             {
                 entity.Property(entry => entry.CreatedOnDBDate)
-                .HasDefaultValueSql("getdate()");
+                .HasDefaultValueSql("GETUTCDATE()");
             });
 
             modelBuilder.Entity<ApplicationUser>(entity =>
             {
                 entity.Property(entry => entry.CreatedOnDBDate)
-                .HasDefaultValueSql("getdate()");
+                .HasDefaultValueSql("GETUTCDATE()");
             });
 
             modelBuilder.Entity<Condition>(entity =>
             {
                 entity.Property(entry => entry.CreatedOnDBDate)
-                .HasDefaultValueSql("getdate()");
+                .HasDefaultValueSql("GETUTCDATE()");
             });
 
             modelBuilder.Entity<Disease>(entity =>
             {
                 entity.Property(entry => entry.CreatedOnDBDate)
-                .HasDefaultValueSql("getdate()");
+                .HasDefaultValueSql("GETUTCDATE()");
             });
 
             modelBuilder.Entity<Drug>(entity =>
             {
                 entity.Property(entry => entry.CreatedOnDBDate)
-                .HasDefaultValueSql("getdate()");
+                .HasDefaultValueSql("GETUTCDATE()");
             });
 
             modelBuilder.Entity<LabTest>(entity =>
             {
                 entity.Property(entry => entry.CreatedOnDBDate)
-                .HasDefaultValueSql("getdate()");
+                .HasDefaultValueSql("GETUTCDATE()");
             });
 
             modelBuilder.Entity<MedicalVisit>(entity =>
             {
                 entity.Property(entry => entry.CreatedOnDBDate)
-                .HasDefaultValueSql("getdate()");
+                .HasDefaultValueSql("GETUTCDATE()");
             });
 
             modelBuilder.Entity<Note>(entity =>
             {
                 entity.Property(entry => entry.CreatedOnDBDate)
-                .HasDefaultValueSql("getdate()");
+                .HasDefaultValueSql("GETUTCDATE()");
             });
 
             modelBuilder.Entity<Pathology>(entity =>
             {
                 entity.Property(entry => entry.CreatedOnDBDate)
-                .HasDefaultValueSql("getdate()");
+                .HasDefaultValueSql("GETUTCDATE()");
             });
 
             modelBuilder.Entity<PrescriptionDrug>(entity =>
             {
                 entity.Property(entry => entry.CreatedOnDBDate)
-                .HasDefaultValueSql("getdate()");
+                .HasDefaultValueSql("GETUTCDATE()");
             });
 
             modelBuilder.Entity<Radiology>(entity =>
             {
                 entity.Property(entry => entry.CreatedOnDBDate)
-                .HasDefaultValueSql("getdate()");
+                .HasDefaultValueSql("GETUTCDATE()");
             });
 
             modelBuilder.Entity<Surgeries>(entity =>
             {
                 entity.Property(entry => entry.CreatedOnDBDate)
-                .HasDefaultValueSql("getdate()");
+                .HasDefaultValueSql("GETUTCDATE()");
             });
 
             modelBuilder.Entity<VaccineConsultation>(entity =>
             {
                 entity.Property(entry => entry.CreatedOnDBDate)
-                .HasDefaultValueSql("getdate()");
+                .HasDefaultValueSql("GETUTCDATE()");
             });
 
             modelBuilder.Entity<Vaccines>(entity =>
             {
                 entity.Property(entry => entry.CreatedOnDBDate)
-                .HasDefaultValueSql("getdate()");
+                .HasDefaultValueSql("GETUTCDATE()");
             });
 
 
